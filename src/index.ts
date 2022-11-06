@@ -1,1 +1,2 @@
-export const Greeter = (name: string): string => `Hello ${name}`;
+export * from './string-prototypes/string.prototypes';
+export * from './number-prototypes/number.prototypes';
