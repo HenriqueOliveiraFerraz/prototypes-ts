@@ -17,12 +17,6 @@
     "format": "prettier --config .prettierrc src/**/*.ts --write",
     "husky": "husky install"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run format",
-      "pre-push": "npm test && npm run lint"
-    }
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/HenriqueOliveiraFerraz/prototypes-ts.git"
