@@ -14,7 +14,8 @@
     "postversion": "git push && git push --tags",
     "lint": "eslint . --ext .ts",
     "lint-fix": "eslint . --ext .ts --fix",
-    "format": "prettier --config .prettierrc src/**/*.ts --write"
+    "format": "prettier --config .prettierrc src/**/*.ts --write",
+    "husky": "husky install"
   },
   "husky": {
     "hooks": {
