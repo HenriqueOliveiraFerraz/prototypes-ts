@@ -3,8 +3,7 @@
     "parser": "@typescript-eslint/parser",
     "plugins": [
       "@typescript-eslint",
-      "prettier",
-      "jest"
+      "prettier"
     ],
     "extends": [
       "eslint:recommended",
@@ -13,13 +12,11 @@
       "prettier"
     ],
     "rules": {
-        "no-console": "warn",
         "semi": "error",
         "prettier/prettier": "error"
     },
     "env": {
         "browser": true,
-        "node": true,
-        "jest/globals": true
+        "node": true
     }
 }
