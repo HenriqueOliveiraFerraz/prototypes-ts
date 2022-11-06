@@ -5,8 +5,9 @@ declare global {
 }
 
 Number.prototype.numberToWord = function (): string {
-  const d = Number(this);
-  console.log(d);
+  const number = Number(this);
+  const numbersWords = ['zero'];
+  console.log(number);
   return 'oi';
 };
 
