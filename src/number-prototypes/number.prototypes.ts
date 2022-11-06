@@ -1,7 +1,13 @@
 declare global {
   interface Number {
-    numberToWord(number: number): string;
+    numberToWord(): string;
   }
 }
+
+Number.prototype.numberToWord = function (): string {
+  const d = Number(this);
+  console.log(d);
+  return 'oi';
+};
 
 export {};

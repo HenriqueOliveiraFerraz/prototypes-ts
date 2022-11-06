@@ -4,7 +4,7 @@ declare global {
   }
 }
 
-String.prototype.padZero = function (length: number) {
+String.prototype.padZero = function (length: number): string {
   let d = String(this);
   while (d.length < length) {
     d = '0' + d;
