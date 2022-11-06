@@ -1,11 +1,17 @@
 {
   "name": "prototypes-ts",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Javascript prototypes extensions with Typescript",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "test": "jest --config jestconfig.json",
     "build": "tsc",
+    "prepare" : "npm run build",
+    "prepublishOnly" : "npm test && npm run lint",
+    "preversion" : "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags",
     "lint": "eslint . --ext .ts",
     "lint-fix": "eslint . --ext .ts --fix",
     "format": "prettier --config .prettierrc src/**/*.ts --write"
