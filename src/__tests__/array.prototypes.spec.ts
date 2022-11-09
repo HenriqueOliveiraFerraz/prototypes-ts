@@ -10,9 +10,11 @@ describe('groupBy', () => {
 
   type InventoryTypes = 'vegetables' | 'fruit' | 'meat';
   type InventoryStates = 'CA' | 'TX' | 'AL';
+  type InventoryQuantities = 0 | 5 | 22 | 23;
 
   type GroupedByInventoryTypes = Record<InventoryTypes, Inventory[]>;
   type GroupedByInventoryStates = Record<InventoryStates, Inventory[]>;
+  type GroupedByInventoryQuantities = Record<InventoryQuantities, Inventory[]>;
 
   const inventory: Inventory[] = [
     { name: 'asparagus', type: 'vegetables', quantity: 5, address: { state: 'CA', country: 'USA' } },
@@ -74,32 +76,37 @@ describe('groupBy', () => {
     expect(groupedByType.AL.length).toEqual(expectedGroup.AL.length);
   });
 
-  // test('should groupBy inventory quantity', () => {
-  //   const inventory: Inventory[] = [
-  //     { name: 'asparagus', type: 'vegetables', quantity: 5 },
-  //     { name: 'bananas', type: 'fruit', quantity: 0 },
-  //     { name: 'goat', type: 'meat', quantity: 23 },
-  //     { name: 'cherries', type: 'fruit', quantity: 5 },
-  //     { name: 'fish', type: 'meat', quantity: 22 }
-  //   ];
+  test('should groupBy inventory quantity', () => {
+    const groupedByType = inventory.groupBy((g) => g.quantity);
+    const expectedGroup: GroupedByInventoryQuantities = {
+      0: [{ name: 'bananas', type: 'fruit', quantity: 0, address: { state: 'TX', country: 'USA' } }],
+      5: [
+        {
+          name: 'asparagus',
+          type: 'vegetables',
+          quantity: 5,
+          address: { state: 'CA', country: 'USA' }
+        },
+        { name: 'cherries', type: 'fruit', quantity: 5, address: { state: 'TX', country: 'USA' } }
+      ],
+      22: [{ name: 'fish', type: 'meat', quantity: 22, address: { state: 'CA', country: 'USA' } }],
+      23: [{ name: 'goat', type: 'meat', quantity: 23, address: { state: 'AL', country: 'USA' } }]
+    };
 
-  //   const groupedByType = inventory.groupBy((g) => g.quantity);
+    expect(groupedByType).toStrictEqual(expectedGroup);
 
-  //   expect(groupedByType[5]).toEqual([
-  //     { name: 'asparagus', type: 'vegetables', quantity: 5 },
-  //     { name: 'cherries', type: 'fruit', quantity: 5 }
-  //   ]);
-  //   expect(groupedByType[5].length).toEqual(2);
+    expect(groupedByType[0]).toEqual(expectedGroup[0]);
+    expect(groupedByType[0].length).toEqual(expectedGroup[0].length);
 
-  //   expect(groupedByType[0]).toEqual([{ name: 'bananas', type: 'fruit', quantity: 0 }]);
-  //   expect(groupedByType[0].length).toEqual(1);
+    expect(groupedByType[5]).toEqual(expectedGroup[5]);
+    expect(groupedByType[5].length).toEqual(expectedGroup[5].length);
 
-  //   expect(groupedByType[22]).toEqual([{ name: 'fish', type: 'meat', quantity: 22 }]);
-  //   expect(groupedByType[22].length).toEqual(1);
+    expect(groupedByType[22]).toEqual(expectedGroup[22]);
+    expect(groupedByType[22].length).toEqual(expectedGroup[22].length);
 
-  //   expect(groupedByType[23]).toEqual([{ name: 'goat', type: 'meat', quantity: 23 }]);
-  //   expect(groupedByType[23].length).toEqual(1);
-  // });
+    expect(groupedByType[23]).toEqual(expectedGroup[23]);
+    expect(groupedByType[23].length).toEqual(expectedGroup[23].length);
+  });
 
   // test('should groupBy inventory based on a condition with a custom string', () => {
   //   const inventory: Inventory[] = [
