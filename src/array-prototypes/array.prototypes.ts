@@ -1,10 +1,6 @@
 declare global {
   interface Array<T> {
-    groupBy<K extends keyof T>(
-      callBack: (value: T) => T[K]
-    ): {
-      [key: string | number | symbol]: Array<T>;
-    };
+    groupBy<K extends keyof T>(callBack: (value: T) => T[K]): Record<PropertyKey, Array<T>>;
   }
 }
 
@@ -14,7 +10,7 @@ Array.prototype.groupBy = function <T, K extends keyof T>(callBack: (value: T) =
     const value: T[] = previousValue[key] || [];
     previousValue[key] = value.concat([currentValue]);
     return previousValue;
-  }, {});
+  }, {} as Record<PropertyKey, T[]>);
 };
 
 export {};
