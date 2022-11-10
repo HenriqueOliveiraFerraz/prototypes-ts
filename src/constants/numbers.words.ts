@@ -22,6 +22,13 @@ export const numbersWordsPtBr = [
   'vinte'
 ];
 
+numbersWordsPtBr[30] = 'trinta';
+numbersWordsPtBr[40] = 'quarenta';
+numbersWordsPtBr[50] = 'cinquenta';
+numbersWordsPtBr[60] = 'sessenta';
+numbersWordsPtBr[70] = 'setenta';
+numbersWordsPtBr[80] = 'oitenta';
+numbersWordsPtBr[90] = 'noventa';
 numbersWordsPtBr[100] = 'cem';
 numbersWordsPtBr[200] = 'duzentos';
 numbersWordsPtBr[300] = 'trezentos';
