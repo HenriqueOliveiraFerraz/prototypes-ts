@@ -1,3 +1,5 @@
+import { numbersWords } from '../functions/numbers.words';
+
 declare global {
   interface Number {
     numberToWord(): string;
@@ -5,7 +7,10 @@ declare global {
 }
 
 Number.prototype.numberToWord = function (): string {
-  return 'oi';
+  const num = Number(this);
+  const result = numbersWords('').find((f, i) => i === this);
+  console.log(result);
+  return numbersWords('pt-BR')[num];
 };
 
 export {};
