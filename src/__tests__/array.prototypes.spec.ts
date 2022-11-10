@@ -11,10 +11,12 @@ describe('groupBy', () => {
   type InventoryTypes = 'vegetables' | 'fruit' | 'meat';
   type InventoryStates = 'CA' | 'TX' | 'AL';
   type InventoryQuantities = 0 | 5 | 22 | 23;
+  type InventoryStock = 'ok' | 'restock';
 
   type GroupedByInventoryTypes = Record<InventoryTypes, Inventory[]>;
   type GroupedByInventoryStates = Record<InventoryStates, Inventory[]>;
   type GroupedByInventoryQuantities = Record<InventoryQuantities, Inventory[]>;
+  type GroupedByInventoryStock = Record<InventoryStock, Inventory[]>;
 
   const inventory: Inventory[] = [
     { name: 'asparagus', type: 'vegetables', quantity: 5, address: { state: 'CA', country: 'USA' } },
@@ -108,30 +110,28 @@ describe('groupBy', () => {
     expect(groupedByType[23].length).toEqual(expectedGroup[23].length);
   });
 
-  // test('should groupBy inventory based on a condition with a custom string', () => {
-  //   const inventory: Inventory[] = [
-  //     { name: 'asparagus', type: 'vegetables', quantity: 5 },
-  //     { name: 'bananas', type: 'fruit', quantity: 0 },
-  //     { name: 'goat', type: 'meat', quantity: 23 },
-  //     { name: 'cherries', type: 'fruit', quantity: 5 },
-  //     { name: 'fish', type: 'meat', quantity: 22 }
-  //   ];
+  test('should groupBy inventory based on a condition with a custom string', () => {
+    const expectedGroup: GroupedByInventoryStock = {
+      ok: [
+        { name: 'goat', type: 'meat', quantity: 23, address: { state: 'AL', country: 'USA' } },
+        { name: 'fish', type: 'meat', quantity: 22, address: { state: 'CA', country: 'USA' } }
+      ],
+      restock: [
+        { name: 'asparagus', type: 'vegetables', quantity: 5, address: { state: 'CA', country: 'USA' } },
+        { name: 'bananas', type: 'fruit', quantity: 0, address: { state: 'TX', country: 'USA' } },
+        { name: 'cherries', type: 'fruit', quantity: 5, address: { state: 'TX', country: 'USA' } }
+      ]
+    };
+    const groupedByType = inventory.groupBy((g) => {
+      return g.quantity > 5 ? 'ok' : 'restock';
+    });
 
-  //   const groupedByType = inventory.groupBy((g) => {
-  //     return g.quantity > 5 ? 'ok' : 'restock';
-  //   });
+    expect(groupedByType).toStrictEqual(groupedByType);
 
-  //   expect(groupedByType.ok).toEqual([
-  //     { name: 'goat', type: 'meat', quantity: 23 },
-  //     { name: 'fish', type: 'meat', quantity: 22 }
-  //   ]);
-  //   expect(groupedByType.ok.length).toEqual(2);
+    expect(groupedByType.ok).toEqual(expectedGroup.ok);
+    expect(groupedByType.ok.length).toEqual(expectedGroup.ok.length);
 
-  //   expect(groupedByType.restock).toEqual([
-  //     { name: 'asparagus', type: 'vegetables', quantity: 5 },
-  //     { name: 'bananas', type: 'fruit', quantity: 0 },
-  //     { name: 'cherries', type: 'fruit', quantity: 5 }
-  //   ]);
-  //   expect(groupedByType.restock.length).toEqual(3);
-  // });
+    expect(groupedByType.restock).toEqual(expectedGroup.restock);
+    expect(groupedByType.restock.length).toEqual(expectedGroup.restock.length);
+  });
 });
