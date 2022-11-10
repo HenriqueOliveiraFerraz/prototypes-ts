@@ -15,14 +15,20 @@ Number.prototype.numberToWord = function (): string {
   if (result) {
     return result;
   } else {
-    if (numString.length < 100) {
+    if (numString.length <= 2) {
       const tens = numbersWords('')[Number(`${numString.charAt(0)}0`)];
       const units = numbersWords('')[Number(numString.charAt(1))];
 
       return `${tens} e ${units}`;
-    }
+    } else if (numString.length <= 3) {
+      const hundreds = num < 200 ? 'cento' : numbersWords('')[Number(`${numString.charAt(0)}00`)];
+      const tens = numbersWords('')[Number(`${numString.charAt(1)}0`)];
+      const units = numbersWords('')[Number(numString.charAt(2))];
 
-    return numString;
+      return `${hundreds} e ${tens} e ${units}`;
+    } else {
+      return 'not found';
+    }
   }
 };
 
