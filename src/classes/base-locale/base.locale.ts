@@ -1,13 +1,13 @@
 export class BaseLocale {
-  constructor(numbersWords: string[], auxiliary: string, hundredAuxiliary: string, notFoundMessage: string) {
+  constructor(numbersWords: string[], andMessage: string, hundredAuxiliary: string, notFoundMessage: string) {
     this.numbersWords = numbersWords;
-    this.auxiliary = auxiliary;
+    this.andMessage = andMessage;
     this.hundredAuxiliary = hundredAuxiliary;
     this.notFoundMessage = notFoundMessage;
   }
 
   numbersWords: string[];
-  auxiliary: string;
+  andMessage: string;
   hundredAuxiliary: string;
   notFoundMessage: string;
 }
