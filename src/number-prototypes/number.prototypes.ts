@@ -12,7 +12,7 @@ Number.prototype.numberToWord = function (): string {
   const numString = this.toString();
   const config = Configuration.createBaseLocaleExtension();
 
-  const result = config.numbersWords[num];
+  let result = config.numbersWords[num];
 
   if (result) {
     return result;
@@ -30,22 +30,28 @@ Number.prototype.numberToWord = function (): string {
       const units = config.numbersWords[Number(numString.charAt(2))];
 
       return `${hundreds} ${config.andMessage} ${tens} ${config.andMessage} ${units}`;
-    } else if (numString.length >= 4 && numString.length <= 6) {
+    } else if (numString.length >= 4 && numString.length <= 5) {
       const first = config.numbersWords[Number(`${numString.charAt(0)}`)];
       const thousandAux = config.numbersWords[1000];
-      const result = `${first}${thousandAux}`;
-      console.log(result);
-
-      for (let index = 0; index < num.zerosAfterTens(); index++) {
-        console.log(index);
-      }
       const hundredNumber = numString.charAt(1);
       const hundreds =
         hundredNumber == '1' ? config.hundredAuxiliary : config.numbersWords[Number(`${hundredNumber}00`)];
       const tens = config.numbersWords[Number(`${numString.charAt(2)}0`)];
       const units = config.numbersWords[Number(numString.charAt(3))];
 
-      return `${first} ${thousandAux} ${config.andMessage} ${hundreds} ${config.andMessage} ${tens} ${config.andMessage} ${units}`;
+      result = `${first} ${thousandAux}`;
+
+      numString.split('').forEach((f, i) => {
+        if (i == 1 && f != '0') {
+          result = result.concat(` ${config.andMessage} ${hundreds}`);
+        } else if (i == 2 && f != '0') {
+          result = result.concat(` ${config.andMessage} ${tens}`);
+        } else if (i == 3 && f != '0') {
+          result = result.concat(` ${config.andMessage} ${units}`);
+        }
+      });
+
+      return result;
     } else {
       return config.notFoundMessage;
     }

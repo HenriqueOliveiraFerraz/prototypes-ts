@@ -40,6 +40,8 @@ describe('numberToWord', () => {
 
     expect(thousandHundredFiftyNine.numberToWord()).toEqual('um mil e cento e cinquenta e nove');
 
+    expect(oneThousandTwoHundred.numberToWord()).toEqual('um mil e duzentos');
+
     expect(twoThousandFiveHundredFortySeven.numberToWord()).toEqual('dois mil e quinhentos e quarenta e sete');
 
     expect(fiveThousandSevenHundredEightyNine.numberToWord()).toEqual('cinco mil e setecentos e oitenta e nove');

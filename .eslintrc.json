@@ -12,10 +12,11 @@
       "prettier"
     ],
     "rules": {
-        "prettier/prettier": "error"
+      "prettier/prettier": "error"
     },
     "env": {
-        "browser": true,
-        "node": true
+      "browser": true,
+      "node": true,
+      "prototypejs": true
     }
 }
