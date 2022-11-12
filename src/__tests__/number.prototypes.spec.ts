@@ -3,7 +3,10 @@ import { Config } from '../index';
 
 const zero = 0;
 const fifteen = 15;
+const twentyOne = 21;
+const thirty = 30;
 const fiftyFive = 55;
+const sixtyTwo = 62;
 const oneHundred = 100;
 const oneHundredTen = 110;
 const oneHundredNinety = 190;
@@ -14,42 +17,57 @@ const fourHundredTwentySix = 426;
 const thousand = 1000;
 const thousandHundredFiftyNine = 1159;
 const oneThousandTwoHundred = 1200;
+const twoThousand = 2000;
 const twoThousandFiveHundredFortySeven = 2547;
 const fiveThousandSevenHundredEightyNine = 5789;
+const nineThousand = 9000;
 const nineThousandNineHundredNinetyNine = 9999;
+const tenThousand = 10000;
 
-describe('numberToWord', () => {
+describe('numberInFull', () => {
   beforeAll(() => Config('pt-BR'));
 
-  test('numberToWord', () => {
-    expect(zero.numberToWord()).toEqual('zero');
+  test('numberInFull', () => {
+    expect(zero.numberInFull()).toEqual('zero');
 
-    expect(fifteen.numberToWord()).toEqual('quinze');
+    expect(fifteen.numberInFull()).toEqual('quinze');
 
-    expect(fiftyFive.numberToWord()).toEqual('cinquenta e cinco');
+    expect(twentyOne.numberInFull()).toEqual('vinte e um');
 
-    expect(hundredSeventyFour.numberToWord()).toEqual('cento e setenta e quatro');
+    expect(thirty.numberInFull()).toEqual('trinta');
 
-    expect(twoHundredFiftyFour.numberToWord()).toEqual('duzentos e cinquenta e quatro');
+    expect(fiftyFive.numberInFull()).toEqual('cinquenta e cinco');
 
-    expect(threeHundredEightyNine.numberToWord()).toEqual('trezentos e oitenta e nove');
+    expect(sixtyTwo.numberInFull()).toEqual('sessenta e dois');
 
-    expect(fourHundredTwentySix.numberToWord()).toEqual('quatrocentos e vinte e seis');
+    expect(hundredSeventyFour.numberInFull()).toEqual('cento e setenta e quatro');
 
-    expect(thousand.numberToWord()).toEqual('mil');
+    expect(twoHundredFiftyFour.numberInFull()).toEqual('duzentos e cinquenta e quatro');
 
-    expect(thousandHundredFiftyNine.numberToWord()).toEqual('um mil e cento e cinquenta e nove');
+    expect(threeHundredEightyNine.numberInFull()).toEqual('trezentos e oitenta e nove');
 
-    expect(oneThousandTwoHundred.numberToWord()).toEqual('um mil e duzentos');
+    expect(fourHundredTwentySix.numberInFull()).toEqual('quatrocentos e vinte e seis');
 
-    expect(twoThousandFiveHundredFortySeven.numberToWord()).toEqual('dois mil e quinhentos e quarenta e sete');
+    expect(thousand.numberInFull()).toEqual('mil');
 
-    expect(fiveThousandSevenHundredEightyNine.numberToWord()).toEqual('cinco mil e setecentos e oitenta e nove');
+    expect(thousandHundredFiftyNine.numberInFull()).toEqual('um mil e cento e cinquenta e nove');
 
-    expect(nineThousandNineHundredNinetyNine.numberToWord()).toEqual('nove mil e novecentos e noventa e nove');
+    expect(oneThousandTwoHundred.numberInFull()).toEqual('um mil e duzentos');
+
+    expect(twoThousand.numberInFull()).toEqual('dois mil');
+
+    expect(twoThousandFiveHundredFortySeven.numberInFull()).toEqual('dois mil e quinhentos e quarenta e sete');
+
+    expect(fiveThousandSevenHundredEightyNine.numberInFull()).toEqual('cinco mil e setecentos e oitenta e nove');
+
+    expect(nineThousand.numberInFull()).toEqual('nove mil');
+
+    expect(nineThousandNineHundredNinetyNine.numberInFull()).toEqual('nove mil e novecentos e noventa e nove');
+
+    //expect(tenThousand.numberInFull()).toEqual('dez mil');
 
     const notFound = 1981129311293112;
-    expect(notFound.numberToWord()).toEqual('não encontrado');
+    expect(notFound.numberInFull()).toEqual('não encontrado');
   });
 });
 
