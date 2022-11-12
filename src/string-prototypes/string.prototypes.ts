@@ -1,15 +1,18 @@
 declare global {
   interface String {
-    padZero(length: number): string;
+    hasOnlyLetters(): boolean;
+    capitalizeFirstLetter(): string;
   }
 }
 
-String.prototype.padZero = function (length: number): string {
-  let d = String(this);
-  while (d.length < length) {
-    d = '0' + d;
-  }
-  return d;
+String.prototype.hasOnlyLetters = function (): boolean {
+  const str = String(this);
+  return /^[a-zA-Z]+$/.test(str);
+};
+
+String.prototype.capitalizeFirstLetter = function (): string {
+  const str = String(this);
+  return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
 export {};

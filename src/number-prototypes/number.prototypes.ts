@@ -24,22 +24,23 @@ Number.prototype.numberToWord = function (): string {
     } else if (numString.length == 3) {
       const hundredNumber = numString.charAt(0);
       const hundreds =
-        hundredNumber == '1' ? config.hundredAuxiliary : config.numbersWords[Number(`${numString.charAt(0)}00`)];
+        hundredNumber == '1' ? config.hundredAuxiliary : config.numbersWords[Number(`${hundredNumber}00`)];
       const tens = config.numbersWords[Number(`${numString.charAt(1)}0`)];
       const units = config.numbersWords[Number(numString.charAt(2))];
 
       return `${hundreds} ${config.auxiliary} ${tens} ${config.auxiliary} ${units}`;
     } else if (numString.length == 4) {
-      const thousands = config.numbersWords[Number(`${numString.charAt(0)}000`)];
+      const first = config.numbersWords[Number(`${numString.charAt(0)}`)];
+      const thousandAux = config.numbersWords[1000];
       const hundredNumber = numString.charAt(1);
       const hundreds =
-        hundredNumber == '1' ? config.hundredAuxiliary : config.numbersWords[Number(`${numString.charAt(1)}00`)];
+        hundredNumber == '1' ? config.hundredAuxiliary : config.numbersWords[Number(`${hundredNumber}00`)];
       const tens = config.numbersWords[Number(`${numString.charAt(2)}0`)];
       const units = config.numbersWords[Number(numString.charAt(3))];
 
-      return `${thousands} ${hundreds} ${config.auxiliary} ${tens} ${config.auxiliary} ${units}`;
+      return `${first} ${thousandAux} ${config.auxiliary} ${hundreds} ${config.auxiliary} ${tens} ${config.auxiliary} ${units}`;
     } else {
-      return 'not found';
+      return config.notFoundMessage;
     }
   }
 };
