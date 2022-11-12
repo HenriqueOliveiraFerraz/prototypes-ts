@@ -30,11 +30,15 @@ Number.prototype.numberToWord = function (): string {
       const units = config.numbersWords[Number(numString.charAt(2))];
 
       return `${hundreds} ${config.andMessage} ${tens} ${config.andMessage} ${units}`;
-    } else if (numString.length == 4) {
-      const result = '';
-      console.log(result.concat('asd'));
+    } else if (numString.length >= 4 && numString.length <= 6) {
       const first = config.numbersWords[Number(`${numString.charAt(0)}`)];
       const thousandAux = config.numbersWords[1000];
+      const result = `${first}${thousandAux}`;
+      console.log(result);
+
+      for (let index = 0; index < num.zerosAfterTens(); index++) {
+        console.log(index);
+      }
       const hundredNumber = numString.charAt(1);
       const hundreds =
         hundredNumber == '1' ? config.hundredAuxiliary : config.numbersWords[Number(`${hundredNumber}00`)];
