@@ -1,6 +1,9 @@
 import '../number-prototypes/number.prototypes';
+import { Config } from '../index';
 
 describe('numberToWord', () => {
+  beforeAll(() => Config('pt-BR'));
+
   test('numberToWord', () => {
     const zero = 0;
     expect(zero.numberToWord()).toEqual('zero');
@@ -22,5 +25,8 @@ describe('numberToWord', () => {
 
     const thousand = 1000;
     expect(thousand.numberToWord()).toEqual('mil');
+
+    const thousandHundredFiftyNine = 1159;
+    expect(thousandHundredFiftyNine.numberToWord()).toEqual('mil cento e cinquenta e nove');
   });
 });
