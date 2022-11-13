@@ -76,6 +76,20 @@ describe('numberInFull', () => {
 
     expect(number.elevenThousand.numberInFull()).toEqual('onze mil');
 
+    expect(number.elevenThousandOneHundred.numberInFull()).toEqual('onze mil e cem');
+
+    expect(number.elevenThousandOneHundredTen.numberInFull()).toEqual('onze mil e cento e dez');
+
+    expect(number.elevenThousandOneHundredEleven.numberInFull()).toEqual('onze mil e cento e onze');
+
+    expect(number.elevenThousandHundredTwelve.numberInFull()).toEqual('onze mil e cento e doze');
+
+    expect(number.elevenThousandTwoHundredTen.numberInFull()).toEqual('onze mil e duzentos e dez');
+
+    expect(number.elevenThousandFourHundredSeventyEight.numberInFull()).toEqual(
+      'onze mil e quatrocentos e setenta e oito'
+    );
+
     const notFound = 1981129311293112;
     expect(notFound.numberInFull()).toEqual('não encontrado');
   });

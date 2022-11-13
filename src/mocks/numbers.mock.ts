@@ -35,5 +35,11 @@ export const number = {
   tenThousandHundredOne: 10101,
   tenThousandHundredTen: 10110,
   tenThousandHundredEleven: 10111,
-  elevenThousand: 11000
+  elevenThousand: 11000,
+  elevenThousandOneHundred: 11100,
+  elevenThousandOneHundredTen: 11110,
+  elevenThousandOneHundredEleven: 11111,
+  elevenThousandHundredTwelve: 11112,
+  elevenThousandTwoHundredTen: 11210,
+  elevenThousandFourHundredSeventyEight: 11478
 };

@@ -11,7 +11,6 @@ export class PtBr extends BaseLocale {
   forbidNextThousand = false;
 
   getUnits(num: string) {
-    const searchBaseNum = this.numbersWords[Number(num)];
     const result = num != '0' && !this.forbidUnits ? this.numbersWords[Number(num)] : '';
     this.forbidUnits = false;
     return { result: result };
@@ -38,7 +37,6 @@ export class PtBr extends BaseLocale {
   getHundreds(num: string) {
     const hundredNum = num.charAt(0);
     const zerosAfter = Number(num).zerosAfterFirstNumber();
-    const searchBaseNum = this.numbersWords[Number(num)];
     const hundreds =
       hundredNum == '1' && zerosAfter < 2 ? this.hundredAuxiliary : this.numbersWords[Number(`${hundredNum}00`)];
     let result = '';
@@ -46,8 +44,6 @@ export class PtBr extends BaseLocale {
     if (hundredNum != '0') {
       result = hundreds;
     }
-
-    const forbidTens = searchBaseNum !== undefined;
 
     return { result: result };
   }
