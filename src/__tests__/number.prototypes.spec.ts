@@ -1,9 +1,43 @@
 import '../number-prototypes/number.prototypes';
 import { Config } from '../index';
 import { number } from '../mocks/numbers.mock';
+import axios from 'axios';
+import * as fs from 'fs';
+import * as path from 'path';
+
+const devsFerramentas = 'https://www.4devs.com.br/ferramentas_online.php';
 
 describe('numberInFull', () => {
   beforeAll(() => Config('pt-BR'));
+
+  // it('axios', async () => {
+  //   const customer = {
+  //     name: 'Newbie Co.',
+  //     order_count: 0,
+  //     address: 'Po Box City'
+  //   };
+  //   fs.writeFile(path.resolve(__dirname, './newCustomer.json'), JSON.stringify(customer), (err) => {
+  //     if (err) {
+  //       console.log('Error writing file', err);
+  //     } else {
+  //       console.log('Successfully wrote file');
+  //     }
+  //   });
+  //   const params = new URLSearchParams();
+  //   params.append('acao', 'escrever_extenso');
+  //   params.append('unidade', 'N');
+  //   params.append('txt_valor', '5789');
+  //   params.append('tipo_letra', 'mi');
+  //   const response = await axios.post(devsFerramentas, params, {
+  //     headers: {
+  //       'content-type': 'application/x-www-form-urlencoded'
+  //     },
+  //     responseType: 'text'
+  //   });
+
+  //   const formattedRes = (response.data as string).trim();
+  //   await expect(number.fiveThousandSevenHundredEightyNine.numberInFull()).toEqual(formattedRes);
+  // });
 
   test('numberInFull', () => {
     expect(number.zero.numberInFull()).toEqual('zero');
