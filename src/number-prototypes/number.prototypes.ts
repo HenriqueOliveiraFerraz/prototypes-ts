@@ -45,12 +45,12 @@ Number.prototype.numberInFull = function (): string {
     } else if (numString.length >= 4 && numString.length <= 5) {
       numString.split('').forEach((f, i) => {
         const group = numString.slice(i);
-        const seila = config.getSeila(group);
+        const numberGroupInFull = config.getNumberGroupInFull(group);
 
-        if (i == 0 && seila) {
-          result = result.concat(`${seila}`);
-        } else if (seila) {
-          result = result.concat(` ${config.andMessage} ${seila}`);
+        if (i == 0 && numberGroupInFull) {
+          result = result.concat(`${numberGroupInFull}`);
+        } else if (numberGroupInFull) {
+          result = result.concat(` ${config.andMessage} ${numberGroupInFull}`);
         }
       });
 

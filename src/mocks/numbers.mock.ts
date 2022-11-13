@@ -28,5 +28,12 @@ export const number = {
   nineThousand: 9000,
   nineThousandOneHundredOne: 9101,
   nineThousandNineHundredNinetyNine: 9999,
-  tenThousand: 10000
+  tenThousand: 10000,
+  tenThousandOne: 10001,
+  tenThousandTen: 10010,
+  tenThousandOneHundred: 10100,
+  tenThousandHundredOne: 10101,
+  tenThousandHundredTen: 10110,
+  tenThousandHundredEleven: 10111,
+  elevenThousand: 11000
 };

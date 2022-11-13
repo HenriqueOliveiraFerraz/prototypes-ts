@@ -46,7 +46,7 @@ export class PtBr extends BaseLocale {
     return result;
   }
 
-  getSeila(num: string): string {
+  getNumberGroupInFull(num: string): string {
     switch (num.length) {
       case 5:
       case 4:

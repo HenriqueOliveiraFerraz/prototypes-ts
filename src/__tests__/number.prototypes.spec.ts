@@ -62,6 +62,20 @@ describe('numberInFull', () => {
 
     expect(number.tenThousand.numberInFull()).toEqual('dez mil');
 
+    expect(number.tenThousandOne.numberInFull()).toEqual('dez mil e um');
+
+    // expect(number.tenThousandTen.numberInFull()).toEqual('dez mil e dez');
+
+    // expect(number.tenThousandOneHundred.numberInFull()).toEqual('dez mil e cem');
+
+    // expect(number.tenThousandHundredOne.numberInFull()).toEqual('dez mil e cento e um');
+
+    // expect(number.tenThousandHundredTen.numberInFull()).toEqual('dez mil e cento e dez');
+
+    // expect(number.tenThousandHundredEleven.numberInFull()).toEqual('dez mil e cento e onze');
+
+    //expect(number.elevenThousand.numberInFull()).toEqual('onze mil');
+
     const notFound = 1981129311293112;
     expect(notFound.numberInFull()).toEqual('não encontrado');
   });
