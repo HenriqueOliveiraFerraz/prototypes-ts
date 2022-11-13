@@ -5,22 +5,29 @@ export class PtBr extends BaseLocale {
     super(generateNumbersWordsPtBr(), 'e', 'cento', 'não encontrado');
   }
 
-  getTens(num: string) {
-    const tens = this.numbersWords[Number(`${num.charAt(0)}0`)];
-    const units = this.numbersWords[Number(num.charAt(1))];
+  getUnits(num: string) {
+    return num != '0' ? this.numbersWords[Number(num)] : '';
+  }
 
-    return `${tens} ${this.andMessage} ${units}`;
+  getTens(num: string) {
+    const tensNum = num.charAt(0);
+    const tens = this.numbersWords[Number(`${num.charAt(0)}0`)];
+    let result = '';
+
+    if (tensNum != '0') {
+      result = tens;
+    }
+
+    return result;
   }
 
   getHundreds(num: string) {
-    const hundredNumber = num.charAt(0);
-    const hundreds = hundredNumber == '1' ? this.hundredAuxiliary : this.numbersWords[Number(`${hundredNumber}00`)];
-    const tensNum = num.charAt(1);
-    let result = `${hundreds}`;
+    const hundredNum = num.charAt(0);
+    const hundreds = hundredNum == '1' ? this.hundredAuxiliary : this.numbersWords[Number(`${hundredNum}00`)];
+    let result = '';
 
-    if (tensNum != '0') {
-      const tens = num.slice(1);
-      result = result.concat(` ${this.andMessage} ${this.getTens(tens)}`);
+    if (hundredNum != '0') {
+      result = hundreds;
     }
 
     return result;
@@ -28,13 +35,11 @@ export class PtBr extends BaseLocale {
 
   getThousands(num: string) {
     const thousandsNum = num.charAt(0);
-    const hundredsNum = num.charAt(1);
-    const thousand = this.numbersWords[1000];
-    let result = `${this.numbersWords[Number(thousandsNum)]} ${thousand}`;
+    const thousands = this.numbersWords[1000];
+    let result = '';
 
-    if (hundredsNum != '0') {
-      const hundreds = num.slice(1);
-      result = result.concat(` ${this.andMessage} ${this.getHundreds(hundreds)}`);
+    if (thousandsNum != '0') {
+      result = result.concat(`${this.numbersWords[Number(thousandsNum)]} ${thousands}`);
     }
 
     return result;

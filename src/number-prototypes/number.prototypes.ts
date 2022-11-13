@@ -1,5 +1,4 @@
 import { Configuration } from '../classes/configuration/configuration';
-import { getNumberGroup } from '../functions/number-helper';
 
 declare global {
   interface Number {
@@ -13,17 +12,51 @@ Number.prototype.numberInFull = function (): string {
   const numString = this.toString();
   const config = Configuration.createBaseLocaleExtension();
 
-  const result = config.numbersWords[num] ?? '';
+  let result = config.numbersWords[num] ?? '';
 
   if (result) {
     return result;
   } else {
     if (numString.length <= 2) {
-      return config.getTens(numString);
+      const tens = config.getTens(numString);
+      const units = config.getUnits(numString.charAt(1));
+
+      result = result.concat(tens);
+
+      if (units) {
+        result = result.concat(` ${config.andMessage} ${units}`);
+      }
+
+      return result;
     } else if (numString.length == 3) {
-      return config.getHundreds(numString);
+      const hundreds = config.getHundreds(numString);
+      const tens = config.getTens(numString.charAt(1));
+      const units = config.getUnits(numString.charAt(2));
+
+      result = result.concat(hundreds);
+
+      [tens, units].forEach((f) => {
+        if (f) {
+          result = result.concat(` ${config.andMessage} ${f}`);
+        }
+      });
+
+      return result;
     } else if (numString.length == 4) {
-      return config.getThousands(numString);
+      const thousands = config.getThousands(numString);
+      const hundreds = config.getHundreds(numString.charAt(1));
+      const tens = config.getTens(numString.charAt(2));
+      const units = config.getUnits(numString.charAt(3));
+
+      result = result.concat(thousands);
+
+      [hundreds, tens, units].forEach((f) => {
+        if (f) {
+          result = result.concat(` ${config.andMessage} ${f}`);
+        }
+      });
+
+      return result;
     } else {
       return config.notFoundMessage;
     }
