@@ -42,17 +42,15 @@ Number.prototype.numberInFull = function (): string {
       });
 
       return result;
-    } else if (numString.length == 4) {
-      const thousands = config.getThousands(numString);
-      const hundreds = config.getHundreds(numString.charAt(1));
-      const tens = config.getTens(numString.charAt(2));
-      const units = config.getUnits(numString.charAt(3));
+    } else if (numString.length >= 4 && numString.length <= 5) {
+      numString.split('').forEach((f, i) => {
+        const group = numString.slice(i);
+        const seila = config.getSeila(group);
 
-      result = result.concat(thousands);
-
-      [hundreds, tens, units].forEach((f) => {
-        if (f) {
-          result = result.concat(` ${config.andMessage} ${f}`);
+        if (i == 0 && seila) {
+          result = result.concat(`${seila}`);
+        } else if (seila) {
+          result = result.concat(` ${config.andMessage} ${seila}`);
         }
       });
 

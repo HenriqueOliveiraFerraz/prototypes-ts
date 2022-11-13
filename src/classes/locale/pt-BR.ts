@@ -34,7 +34,8 @@ export class PtBr extends BaseLocale {
   }
 
   getThousands(num: string) {
-    const thousandsNum = num.charAt(0);
+    const endIndex = num.length == 4 ? 1 : num.length == 5 ? 2 : 3;
+    const thousandsNum = num.substring(0, endIndex);
     const thousands = this.numbersWords[1000];
     let result = '';
 
@@ -43,6 +44,22 @@ export class PtBr extends BaseLocale {
     }
 
     return result;
+  }
+
+  getSeila(num: string): string {
+    switch (num.length) {
+      case 5:
+      case 4:
+        return this.getThousands(num);
+      case 3:
+        return this.getHundreds(num);
+      case 2:
+        return this.getTens(num);
+      case 1:
+        return this.getUnits(num);
+      default:
+        return '';
+    }
   }
 }
 
