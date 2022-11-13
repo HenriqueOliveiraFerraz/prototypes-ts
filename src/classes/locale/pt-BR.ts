@@ -5,32 +5,47 @@ export class PtBr extends BaseLocale {
     super(generateNumbersWordsPtBr(), 'e', 'cento', 'não encontrado');
   }
 
+  forbidUnits = false;
+
   getUnits(num: string) {
-    return num != '0' ? this.numbersWords[Number(num)] : '';
+    const teste = this.numbersWords[Number(num)];
+    const result = num != '0' && !this.forbidUnits ? this.numbersWords[Number(num)] : '';
+    return { result: result };
   }
 
   getTens(num: string) {
     const tensNum = num.charAt(0);
     const tens = this.numbersWords[Number(`${num.charAt(0)}0`)];
+    const unitsNum = num.charAt(1);
+    const searchBaseNum = this.numbersWords[Number(num)];
     let result = '';
 
-    if (tensNum != '0') {
+    if (tensNum != '0' && searchBaseNum !== undefined) {
+      result = searchBaseNum;
+    } else if (tensNum != '0') {
       result = tens;
     }
 
-    return result;
+    this.forbidUnits = unitsNum == '0' || (tensNum != '0' && unitsNum != '0' && searchBaseNum !== undefined);
+
+    return { result: result };
   }
 
   getHundreds(num: string) {
     const hundredNum = num.charAt(0);
-    const hundreds = hundredNum == '1' ? this.hundredAuxiliary : this.numbersWords[Number(`${hundredNum}00`)];
+    const zerosAfter = Number(num).zerosAfterFirstNumber();
+    const searchBaseNum = this.numbersWords[Number(num)];
+    const hundreds =
+      hundredNum == '1' && zerosAfter < 2 ? this.hundredAuxiliary : this.numbersWords[Number(`${hundredNum}00`)];
     let result = '';
 
     if (hundredNum != '0') {
       result = hundreds;
     }
 
-    return result;
+    const forbidTens = searchBaseNum !== undefined;
+
+    return { result: result, forbidTens: false };
   }
 
   getThousands(num: string) {
@@ -43,10 +58,10 @@ export class PtBr extends BaseLocale {
       result = result.concat(`${this.numbersWords[Number(thousandsNum)]} ${thousands}`);
     }
 
-    return result;
+    return { result: result, forbidHundreds: false };
   }
 
-  getNumberGroupInFull(num: string): string {
+  getNumberGroupInFull(num: string) {
     switch (num.length) {
       case 5:
       case 4:
@@ -58,7 +73,7 @@ export class PtBr extends BaseLocale {
       case 1:
         return this.getUnits(num);
       default:
-        return '';
+        return { result: '' };
     }
   }
 }

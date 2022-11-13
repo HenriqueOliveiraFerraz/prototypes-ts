@@ -64,15 +64,15 @@ describe('numberInFull', () => {
 
     expect(number.tenThousandOne.numberInFull()).toEqual('dez mil e um');
 
-    // expect(number.tenThousandTen.numberInFull()).toEqual('dez mil e dez');
+    expect(number.tenThousandTen.numberInFull()).toEqual('dez mil e dez');
 
-    // expect(number.tenThousandOneHundred.numberInFull()).toEqual('dez mil e cem');
+    expect(number.tenThousandOneHundred.numberInFull()).toEqual('dez mil e cem');
 
-    // expect(number.tenThousandHundredOne.numberInFull()).toEqual('dez mil e cento e um');
+    expect(number.tenThousandHundredOne.numberInFull()).toEqual('dez mil e cento e um');
 
-    // expect(number.tenThousandHundredTen.numberInFull()).toEqual('dez mil e cento e dez');
+    expect(number.tenThousandHundredTen.numberInFull()).toEqual('dez mil e cento e dez');
 
-    // expect(number.tenThousandHundredEleven.numberInFull()).toEqual('dez mil e cento e onze');
+    expect(number.tenThousandHundredEleven.numberInFull()).toEqual('dez mil e cento e onze');
 
     //expect(number.elevenThousand.numberInFull()).toEqual('onze mil');
 
@@ -81,40 +81,40 @@ describe('numberInFull', () => {
   });
 });
 
-describe('zerosAfterTens', () => {
+describe('zerosAfterFirstNumber', () => {
   beforeAll(() => Config('pt-BR'));
 
-  test('zerosAfterTens', () => {
-    expect(number.zero.zerosAfterTens()).toEqual(0);
+  test('zerosAfterFirstNumber', () => {
+    expect(number.zero.zerosAfterFirstNumber()).toEqual(0);
 
-    expect(number.fifteen.zerosAfterTens()).toEqual(0);
+    expect(number.fifteen.zerosAfterFirstNumber()).toEqual(0);
 
-    expect(number.fiftyFive.zerosAfterTens()).toEqual(0);
+    expect(number.fiftyFive.zerosAfterFirstNumber()).toEqual(0);
 
-    expect(number.oneHundred.zerosAfterTens()).toEqual(1);
+    expect(number.oneHundred.zerosAfterFirstNumber()).toEqual(2);
 
-    expect(number.oneHundredTen.zerosAfterTens()).toEqual(1);
+    expect(number.oneHundredTen.zerosAfterFirstNumber()).toEqual(1);
 
-    expect(number.oneHundredNinety.zerosAfterTens()).toEqual(1);
+    expect(number.oneHundredNinety.zerosAfterFirstNumber()).toEqual(1);
 
-    expect(number.hundredSeventyFour.zerosAfterTens()).toEqual(0);
+    expect(number.hundredSeventyFour.zerosAfterFirstNumber()).toEqual(0);
 
-    expect(number.twoHundredFiftyFour.zerosAfterTens()).toEqual(0);
+    expect(number.twoHundredFiftyFour.zerosAfterFirstNumber()).toEqual(0);
 
-    expect(number.threeHundredEightyNine.zerosAfterTens()).toEqual(0);
+    expect(number.threeHundredEightyNine.zerosAfterFirstNumber()).toEqual(0);
 
-    expect(number.fourHundredTwentySix.zerosAfterTens()).toEqual(0);
+    expect(number.fourHundredTwentySix.zerosAfterFirstNumber()).toEqual(0);
 
-    expect(number.thousand.zerosAfterTens()).toEqual(2);
+    expect(number.thousand.zerosAfterFirstNumber()).toEqual(3);
 
-    expect(number.oneThousandTwoHundred.zerosAfterTens()).toEqual(2);
+    expect(number.oneThousandTwoHundred.zerosAfterFirstNumber()).toEqual(2);
 
-    expect(number.thousandHundredFiftyNine.zerosAfterTens()).toEqual(0);
+    expect(number.thousandHundredFiftyNine.zerosAfterFirstNumber()).toEqual(0);
 
-    expect(number.twoThousandFiveHundredFortySeven.zerosAfterTens()).toEqual(0);
+    expect(number.twoThousandFiveHundredFortySeven.zerosAfterFirstNumber()).toEqual(0);
 
-    expect(number.fiveThousandSevenHundredEightyNine.zerosAfterTens()).toEqual(0);
+    expect(number.fiveThousandSevenHundredEightyNine.zerosAfterFirstNumber()).toEqual(0);
 
-    expect(number.nineThousandNineHundredNinetyNine.zerosAfterTens()).toEqual(0);
+    expect(number.nineThousandNineHundredNinetyNine.zerosAfterFirstNumber()).toEqual(0);
   });
 });
