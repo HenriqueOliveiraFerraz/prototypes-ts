@@ -74,7 +74,7 @@ describe('numberInFull', () => {
 
     expect(number.tenThousandHundredEleven.numberInFull()).toEqual('dez mil e cento e onze');
 
-    //expect(number.elevenThousand.numberInFull()).toEqual('onze mil');
+    expect(number.elevenThousand.numberInFull()).toEqual('onze mil');
 
     const notFound = 1981129311293112;
     expect(notFound.numberInFull()).toEqual('não encontrado');
