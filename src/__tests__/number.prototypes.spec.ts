@@ -90,6 +90,10 @@ describe('numberInFull', () => {
       'onze mil e quatrocentos e setenta e oito'
     );
 
+    expect(number.twentyThousandOneHundredFiftyNine.numberInFull()).toEqual('vinte mil e cento e cinquenta e nove');
+
+    expect(number.fiftyOneThousandFifty.numberInFull()).toEqual('cinquenta e um mil e cinquenta');
+
     const notFound = 1981129311293112;
     expect(notFound.numberInFull()).toEqual('não encontrado');
   });

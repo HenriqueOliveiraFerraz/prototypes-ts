@@ -41,5 +41,7 @@ export const number = {
   elevenThousandOneHundredEleven: 11111,
   elevenThousandHundredTwelve: 11112,
   elevenThousandTwoHundredTen: 11210,
-  elevenThousandFourHundredSeventyEight: 11478
+  elevenThousandFourHundredSeventyEight: 11478,
+  twentyThousandOneHundredFiftyNine: 20159,
+  fiftyOneThousandFifty: 51050
 };

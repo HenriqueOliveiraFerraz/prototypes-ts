@@ -49,15 +49,16 @@ export class PtBr extends BaseLocale {
   }
 
   getThousands(num: string) {
-    const endIndex = num.length == 4 ? 1 : 2;
+    const endIndex = this.getThousandEndIndex(num);
     const thousandsNum = num.substring(0, endIndex);
-    const searchBaseNum = this.numbersWords[Number(thousandsNum)];
+    const searchBaseNum = this.getTens(thousandsNum).result;
+    const units = this.getUnits(thousandsNum.charAt(1)).result;
     const thousands = this.numbersWords[1000];
     let result = '';
 
     if (thousandsNum != '0' && !this.forbidNextThousand) {
       this.forbidNextThousand = false;
-      result = result.concat(`${searchBaseNum} ${thousands}`);
+      result = result.concat(`${searchBaseNum.concat(`${units ? ` ${this.andMessage} ${units}` : ''}`)} ${thousands}`);
     }
 
     this.forbidNextThousand = searchBaseNum !== undefined;
@@ -78,6 +79,17 @@ export class PtBr extends BaseLocale {
         return this.getUnits(num);
       default:
         return { result: '' };
+    }
+  }
+
+  getThousandEndIndex(num: string) {
+    switch (num.length) {
+      case 5:
+        return 2;
+      case 4:
+        return 1;
+      default:
+        return undefined;
     }
   }
 }
