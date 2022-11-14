@@ -14,15 +14,17 @@ describe('numberInFull', () => {
 
   // it('axios', async () => {
   //   const responses: AxiosResponse<string, any>[] = [];
-  //   const number = {};
+  //   const number: { [key: string]: string } = {};
 
-  //   for (let index = 153; index < 159; index++) {
+  //   for (let index = 1; index < 5000; index++) {
   //     const res = await getNumberInFull({
   //       acao: 'escrever_extenso',
   //       unidade: 'N',
   //       txt_valor: index.toString(),
   //       tipo_letra: 'mi'
   //     });
+  //     const numberInFull = res.data.trim();
+
   //     res.data = res.data.trim();
   //     res.data = res.data.capitalizeFirstLetter();
   //     res.data = res.data
@@ -34,12 +36,14 @@ describe('numberInFull', () => {
   //       .join('');
   //     res.data.replace(/\s/g, '');
   //     res.data = res.data.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+  //     number[res.data] = numberInFull;
+
   //     responses.push(res);
-  //     console.log(res.data);
-  //     await pause(500);
+  //     await pause(1000);
   //   }
 
-  //   fs.writeFile(path.resolve(__dirname, './newCustomer.json'), JSON.stringify(customer), (err) => {
+  //   fs.writeFile(path.resolve(__dirname, './numeros.json'), JSON.stringify(number), (err) => {
   //     if (err) {
   //       console.log('Error writing file', err);
   //     } else {
@@ -47,8 +51,8 @@ describe('numberInFull', () => {
   //     }
   //   });
 
-  //   await expect('responses').toBeTruthy();
-  // }, 10000);
+  //   await expect(responses).toBeTruthy();
+  // });
 
   test('numberInFull', () => {
     expect(number.zero.numberInFull()).toEqual('zero');
