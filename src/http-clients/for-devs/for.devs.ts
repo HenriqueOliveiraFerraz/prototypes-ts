@@ -38,5 +38,5 @@ export function getArrayNumbersInFull(requests: NumeroExtensoRequest[]) {
     });
   });
 
-  return axios.all(axiosRequests);
+  return Promise.all(axiosRequests);
 }

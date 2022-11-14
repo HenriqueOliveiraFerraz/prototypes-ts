@@ -1,4 +1,5 @@
 export interface NumeroExtensoRequest {
+  /** Ação da request a executar */
   acao: 'escrever_extenso';
   /** Unidade numérica simples ou monetária em real */
   unidade: 'N' | 'R';

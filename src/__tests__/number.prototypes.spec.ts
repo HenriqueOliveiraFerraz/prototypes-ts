@@ -1,21 +1,44 @@
 import '../number-prototypes/number.prototypes';
 import { Config } from '../index';
 import { number } from '../mocks/numbers.mock';
-import axios from 'axios';
+import { NumeroExtensoRequest } from '../http-clients/for-devs/interfaces/numero.extenso';
+import { getArrayNumbersInFull, getNumberInFull } from '../http-clients/for-devs/for.devs';
+import axios, { AxiosResponse } from 'axios';
 import * as fs from 'fs';
 import * as path from 'path';
-
-const devsFerramentas = 'https://www.4devs.com.br/ferramentas_online.php';
 
 describe('numberInFull', () => {
   beforeAll(() => Config('pt-BR'));
 
+  const pause = (ms: number) => new Promise((res) => setTimeout(res, ms));
+
   // it('axios', async () => {
-  //   const customer = {
-  //     name: 'Newbie Co.',
-  //     order_count: 0,
-  //     address: 'Po Box City'
-  //   };
+  //   const responses: AxiosResponse<string, any>[] = [];
+  //   const number = {};
+
+  //   for (let index = 153; index < 159; index++) {
+  //     const res = await getNumberInFull({
+  //       acao: 'escrever_extenso',
+  //       unidade: 'N',
+  //       txt_valor: index.toString(),
+  //       tipo_letra: 'mi'
+  //     });
+  //     res.data = res.data.trim();
+  //     res.data = res.data.capitalizeFirstLetter();
+  //     res.data = res.data
+  //       .split(' ')
+  //       .map((f) => {
+  //         f = f.capitalizeFirstLetter();
+  //         return f;
+  //       })
+  //       .join('');
+  //     res.data.replace(/\s/g, '');
+  //     res.data = res.data.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  //     responses.push(res);
+  //     console.log(res.data);
+  //     await pause(500);
+  //   }
+
   //   fs.writeFile(path.resolve(__dirname, './newCustomer.json'), JSON.stringify(customer), (err) => {
   //     if (err) {
   //       console.log('Error writing file', err);
@@ -23,21 +46,9 @@ describe('numberInFull', () => {
   //       console.log('Successfully wrote file');
   //     }
   //   });
-  //   const params = new URLSearchParams();
-  //   params.append('acao', 'escrever_extenso');
-  //   params.append('unidade', 'N');
-  //   params.append('txt_valor', '5789');
-  //   params.append('tipo_letra', 'mi');
-  //   const response = await axios.post(devsFerramentas, params, {
-  //     headers: {
-  //       'content-type': 'application/x-www-form-urlencoded'
-  //     },
-  //     responseType: 'text'
-  //   });
 
-  //   const formattedRes = (response.data as string).trim();
-  //   await expect(number.fiveThousandSevenHundredEightyNine.numberInFull()).toEqual(formattedRes);
-  // });
+  //   await expect('responses').toBeTruthy();
+  // }, 10000);
 
   test('numberInFull', () => {
     expect(number.zero.numberInFull()).toEqual('zero');
