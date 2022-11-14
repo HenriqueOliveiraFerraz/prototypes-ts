@@ -98,9 +98,7 @@ describe('groupBy', () => {
   test('should groupBy inventory quantity', () => {
     const groupedByType = inventory.groupBy((g) => g.quantity);
     const expectedGroup: GroupedByInventoryQuantities = {
-      0: [
-        { name: 'bananas', type: 'fruit', quantity: 0, address: { state: 'TX', country: 'USA' } }
-      ],
+      0: [{ name: 'bananas', type: 'fruit', quantity: 0, address: { state: 'TX', country: 'USA' } }],
       5: [
         {
           name: 'asparagus',
