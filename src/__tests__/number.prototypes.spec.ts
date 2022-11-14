@@ -1,11 +1,13 @@
+/* eslint-disable prefer-const */
 import '../number-prototypes/number.prototypes';
 import { Config } from '../index';
 import { number } from '../mocks/numbers.mock';
 import { NumeroExtensoRequest } from '../http-clients/for-devs/interfaces/numero.extenso';
 import { getArrayNumbersInFull, getNumberInFull } from '../http-clients/for-devs/for.devs';
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosResponse, formToJSON } from 'axios';
 import * as fs from 'fs';
 import * as path from 'path';
+import * as fileContent from '../mocks/numeros.mock.json';
 
 describe('numberInFull', () => {
   beforeAll(() => Config('pt-BR'));
@@ -14,9 +16,9 @@ describe('numberInFull', () => {
 
   // it('axios', async () => {
   //   const responses: AxiosResponse<string, any>[] = [];
-  //   const number: { [key: string]: string } = {};
+  //   let number = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../mocks/numeros.mock.json'), 'utf8'));
 
-  //   for (let index = 1; index < 5000; index++) {
+  //   for (let index = 5006; index <= 5100; index++) {
   //     const res = await getNumberInFull({
   //       acao: 'escrever_extenso',
   //       unidade: 'N',
@@ -40,10 +42,10 @@ describe('numberInFull', () => {
   //     number[res.data] = numberInFull;
 
   //     responses.push(res);
-  //     await pause(1000);
+  //     await pause(250);
   //   }
 
-  //   fs.writeFile(path.resolve(__dirname, './numeros.json'), JSON.stringify(number), (err) => {
+  //   fs.writeFile(path.resolve(__dirname, '../mocks/numeros.mock.json'), JSON.stringify(number, null, 2), (err) => {
   //     if (err) {
   //       console.log('Error writing file', err);
   //     } else {
@@ -52,7 +54,7 @@ describe('numberInFull', () => {
   //   });
 
   //   await expect(responses).toBeTruthy();
-  // });
+  // }, 1000000);
 
   test('numberInFull', () => {
     expect(number.zero.numberInFull()).toEqual('zero');
