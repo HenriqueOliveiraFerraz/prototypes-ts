@@ -18,7 +18,7 @@ describe('numberInFull', () => {
   //   const responses: AxiosResponse<string, any>[] = [];
   //   let number = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../mocks/numeros.mock.json'), 'utf8'));
 
-  //   for (let index = 5006; index <= 5100; index++) {
+  //   for (let index = 5127; index <= 10000; index++) {
   //     const res = await getNumberInFull({
   //       acao: 'escrever_extenso',
   //       unidade: 'N',
@@ -43,18 +43,18 @@ describe('numberInFull', () => {
 
   //     responses.push(res);
   //     await pause(250);
+
+  //     fs.writeFile(path.resolve(__dirname, '../mocks/numeros.mock.json'), JSON.stringify(number, null, 2), (err) => {
+  //       if (err) {
+  //         console.log('Error writing file', err);
+  //       } else {
+  //         console.log('Successfully wrote file');
+  //       }
+  //     });
   //   }
 
-  //   fs.writeFile(path.resolve(__dirname, '../mocks/numeros.mock.json'), JSON.stringify(number, null, 2), (err) => {
-  //     if (err) {
-  //       console.log('Error writing file', err);
-  //     } else {
-  //       console.log('Successfully wrote file');
-  //     }
-  //   });
-
   //   await expect(responses).toBeTruthy();
-  // }, 1000000);
+  // }, 10000000);
 
   test('numberInFull', () => {
     let number = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../mocks/numeros.mock.json'), 'utf8'));
