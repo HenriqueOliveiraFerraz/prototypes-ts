@@ -19,7 +19,12 @@ describe('groupBy', () => {
   type GroupedByInventoryStock = Record<InventoryStock, Inventory[]>;
 
   const inventory: Inventory[] = [
-    { name: 'asparagus', type: 'vegetables', quantity: 5, address: { state: 'CA', country: 'USA' } },
+    {
+      name: 'asparagus',
+      type: 'vegetables',
+      quantity: 5,
+      address: { state: 'CA', country: 'USA' }
+    },
     { name: 'bananas', type: 'fruit', quantity: 0, address: { state: 'TX', country: 'USA' } },
     { name: 'goat', type: 'meat', quantity: 23, address: { state: 'AL', country: 'USA' } },
     { name: 'cherries', type: 'fruit', quantity: 5, address: { state: 'TX', country: 'USA' } },
@@ -29,7 +34,14 @@ describe('groupBy', () => {
   test('should groupBy inventory type', () => {
     const groupedByType = inventory.groupBy((g) => g.type);
     const expectedGroup: GroupedByInventoryTypes = {
-      vegetables: [{ name: 'asparagus', type: 'vegetables', quantity: 5, address: { state: 'CA', country: 'USA' } }],
+      vegetables: [
+        {
+          name: 'asparagus',
+          type: 'vegetables',
+          quantity: 5,
+          address: { state: 'CA', country: 'USA' }
+        }
+      ],
       fruit: [
         { name: 'bananas', type: 'fruit', quantity: 0, address: { state: 'TX', country: 'USA' } },
         { name: 'cherries', type: 'fruit', quantity: 5, address: { state: 'TX', country: 'USA' } }
@@ -56,7 +68,12 @@ describe('groupBy', () => {
     const groupedByType = inventory.groupBy((g) => g.address.state);
     const expectedGroup: GroupedByInventoryStates = {
       CA: [
-        { name: 'asparagus', type: 'vegetables', quantity: 5, address: { state: 'CA', country: 'USA' } },
+        {
+          name: 'asparagus',
+          type: 'vegetables',
+          quantity: 5,
+          address: { state: 'CA', country: 'USA' }
+        },
         { name: 'fish', type: 'meat', quantity: 22, address: { state: 'CA', country: 'USA' } }
       ],
       TX: [
@@ -81,7 +98,9 @@ describe('groupBy', () => {
   test('should groupBy inventory quantity', () => {
     const groupedByType = inventory.groupBy((g) => g.quantity);
     const expectedGroup: GroupedByInventoryQuantities = {
-      0: [{ name: 'bananas', type: 'fruit', quantity: 0, address: { state: 'TX', country: 'USA' } }],
+      0: [
+        { name: 'bananas', type: 'fruit', quantity: 0, address: { state: 'TX', country: 'USA' } }
+      ],
       5: [
         {
           name: 'asparagus',
@@ -117,7 +136,12 @@ describe('groupBy', () => {
         { name: 'fish', type: 'meat', quantity: 22, address: { state: 'CA', country: 'USA' } }
       ],
       restock: [
-        { name: 'asparagus', type: 'vegetables', quantity: 5, address: { state: 'CA', country: 'USA' } },
+        {
+          name: 'asparagus',
+          type: 'vegetables',
+          quantity: 5,
+          address: { state: 'CA', country: 'USA' }
+        },
         { name: 'bananas', type: 'fruit', quantity: 0, address: { state: 'TX', country: 'USA' } },
         { name: 'cherries', type: 'fruit', quantity: 5, address: { state: 'TX', country: 'USA' } }
       ]

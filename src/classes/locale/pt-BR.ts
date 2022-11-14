@@ -29,7 +29,8 @@ export class PtBr extends BaseLocale {
       result = tens;
     }
 
-    this.forbidUnits = unitsNum == '0' || (tensNum != '0' && unitsNum != '0' && searchBaseNum !== undefined);
+    this.forbidUnits =
+      unitsNum == '0' || (tensNum != '0' && unitsNum != '0' && searchBaseNum !== undefined);
 
     return { result: result };
   }
@@ -38,7 +39,9 @@ export class PtBr extends BaseLocale {
     const hundredNum = num.charAt(0);
     const zerosAfter = Number(num).zerosAfterFirstNumber();
     const hundreds =
-      hundredNum == '1' && zerosAfter < 2 ? this.hundredAuxiliary : this.numbersWords[Number(`${hundredNum}00`)];
+      hundredNum == '1' && zerosAfter < 2
+        ? this.hundredAuxiliary
+        : this.numbersWords[Number(`${hundredNum}00`)];
     let result = '';
 
     if (hundredNum != '0') {
@@ -58,7 +61,9 @@ export class PtBr extends BaseLocale {
 
     if (thousandsNum != '0' && !this.forbidNextThousand) {
       this.forbidNextThousand = false;
-      result = result.concat(`${searchBaseNum.concat(`${units ? ` ${this.andMessage} ${units}` : ''}`)} ${thousands}`);
+      result = result.concat(
+        `${searchBaseNum.concat(`${units ? ` ${this.andMessage} ${units}` : ''}`)} ${thousands}`
+      );
     }
 
     this.forbidNextThousand = searchBaseNum !== undefined;
