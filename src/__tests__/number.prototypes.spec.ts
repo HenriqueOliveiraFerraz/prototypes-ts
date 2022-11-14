@@ -57,93 +57,99 @@ describe('numberInFull', () => {
   // }, 1000000);
 
   test('numberInFull', () => {
-    expect(number.zero.numberInFull()).toEqual('zero');
+    let number = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../mocks/numeros.mock.json'), 'utf8'));
 
-    expect(number.fifteen.numberInFull()).toEqual('quinze');
+    Object.keys(number).forEach((f, i) => {
+      const element = number[f];
+      expect(i.numberInFull()).toEqual(element);
+    });
+    // expect(number.zero.numberInFull()).toEqual('zero');
 
-    expect(number.twentyOne.numberInFull()).toEqual('vinte e um');
+    // expect(number.fifteen.numberInFull()).toEqual('quinze');
 
-    expect(number.thirty.numberInFull()).toEqual('trinta');
+    // expect(number.twentyOne.numberInFull()).toEqual('vinte e um');
 
-    expect(number.fiftyFive.numberInFull()).toEqual('cinquenta e cinco');
+    // expect(number.thirty.numberInFull()).toEqual('trinta');
 
-    expect(number.sixtyTwo.numberInFull()).toEqual('sessenta e dois');
+    // expect(number.fiftyFive.numberInFull()).toEqual('cinquenta e cinco');
 
-    expect(number.ninetyNine.numberInFull()).toEqual('noventa e nove');
+    // expect(number.sixtyTwo.numberInFull()).toEqual('sessenta e dois');
 
-    expect(number.oneHundred.numberInFull()).toEqual('cem');
+    // expect(number.ninetyNine.numberInFull()).toEqual('noventa e nove');
 
-    expect(number.oneHundredOne.numberInFull()).toEqual('cento e um');
+    // expect(number.oneHundred.numberInFull()).toEqual('cem');
 
-    expect(number.hundredSeventyFour.numberInFull()).toEqual('cento e setenta e quatro');
+    // expect(number.oneHundredOne.numberInFull()).toEqual('cento e um');
 
-    expect(number.twoHundredFiftyFour.numberInFull()).toEqual('duzentos e cinquenta e quatro');
+    // expect(number.hundredSeventyFour.numberInFull()).toEqual('cento e setenta e quatro');
 
-    expect(number.threeHundredEightyNine.numberInFull()).toEqual('trezentos e oitenta e nove');
+    // expect(number.twoHundredFiftyFour.numberInFull()).toEqual('duzentos e cinquenta e quatro');
 
-    expect(number.fiveHundred.numberInFull()).toEqual('quinhentos');
+    // expect(number.threeHundredEightyNine.numberInFull()).toEqual('trezentos e oitenta e nove');
 
-    expect(number.fourHundredTwentySix.numberInFull()).toEqual('quatrocentos e vinte e seis');
+    // expect(number.fiveHundred.numberInFull()).toEqual('quinhentos');
 
-    expect(number.thousand.numberInFull()).toEqual('mil');
+    // expect(number.fourHundredTwentySix.numberInFull()).toEqual('quatrocentos e vinte e seis');
 
-    expect(number.oneThousandTen.numberInFull()).toEqual('um mil e dez');
+    // expect(number.thousand.numberInFull()).toEqual('mil');
 
-    expect(number.thousandHundredFiftyNine.numberInFull()).toEqual('um mil e cento e cinquenta e nove');
+    // expect(number.oneThousandTen.numberInFull()).toEqual('um mil e dez');
 
-    expect(number.oneThousandTwoHundred.numberInFull()).toEqual('um mil e duzentos');
+    // expect(number.thousandHundredFiftyNine.numberInFull()).toEqual('um mil e cento e cinquenta e nove');
 
-    expect(number.oneThousandFiveHundred.numberInFull()).toEqual('um mil e quinhentos');
+    // expect(number.oneThousandTwoHundred.numberInFull()).toEqual('um mil e duzentos');
 
-    expect(number.oneThousandTwoHundredOne.numberInFull()).toEqual('um mil e duzentos e um');
+    // expect(number.oneThousandFiveHundred.numberInFull()).toEqual('um mil e quinhentos');
 
-    expect(number.twoThousand.numberInFull()).toEqual('dois mil');
+    // expect(number.oneThousandTwoHundredOne.numberInFull()).toEqual('um mil e duzentos e um');
 
-    expect(number.twoThousandOne.numberInFull()).toEqual('dois mil e um');
+    // expect(number.twoThousand.numberInFull()).toEqual('dois mil');
 
-    expect(number.twoThousandFiveHundredFortySeven.numberInFull()).toEqual('dois mil e quinhentos e quarenta e sete');
+    // expect(number.twoThousandOne.numberInFull()).toEqual('dois mil e um');
 
-    expect(number.fiveThousandSevenHundredEightyNine.numberInFull()).toEqual('cinco mil e setecentos e oitenta e nove');
+    // expect(number.twoThousandFiveHundredFortySeven.numberInFull()).toEqual('dois mil e quinhentos e quarenta e sete');
 
-    expect(number.nineThousand.numberInFull()).toEqual('nove mil');
+    // expect(number.fiveThousandSevenHundredEightyNine.numberInFull()).toEqual('cinco mil e setecentos e oitenta e nove');
 
-    expect(number.nineThousandOneHundredOne.numberInFull()).toEqual('nove mil e cento e um');
+    // expect(number.nineThousand.numberInFull()).toEqual('nove mil');
 
-    expect(number.nineThousandNineHundredNinetyNine.numberInFull()).toEqual('nove mil e novecentos e noventa e nove');
+    // expect(number.nineThousandOneHundredOne.numberInFull()).toEqual('nove mil e cento e um');
 
-    expect(number.tenThousand.numberInFull()).toEqual('dez mil');
+    // expect(number.nineThousandNineHundredNinetyNine.numberInFull()).toEqual('nove mil e novecentos e noventa e nove');
 
-    expect(number.tenThousandOne.numberInFull()).toEqual('dez mil e um');
+    // expect(number.tenThousand.numberInFull()).toEqual('dez mil');
 
-    expect(number.tenThousandTen.numberInFull()).toEqual('dez mil e dez');
+    // expect(number.tenThousandOne.numberInFull()).toEqual('dez mil e um');
 
-    expect(number.tenThousandOneHundred.numberInFull()).toEqual('dez mil e cem');
+    // expect(number.tenThousandTen.numberInFull()).toEqual('dez mil e dez');
 
-    expect(number.tenThousandHundredOne.numberInFull()).toEqual('dez mil e cento e um');
+    // expect(number.tenThousandOneHundred.numberInFull()).toEqual('dez mil e cem');
 
-    expect(number.tenThousandHundredTen.numberInFull()).toEqual('dez mil e cento e dez');
+    // expect(number.tenThousandHundredOne.numberInFull()).toEqual('dez mil e cento e um');
 
-    expect(number.tenThousandHundredEleven.numberInFull()).toEqual('dez mil e cento e onze');
+    // expect(number.tenThousandHundredTen.numberInFull()).toEqual('dez mil e cento e dez');
 
-    expect(number.elevenThousand.numberInFull()).toEqual('onze mil');
+    // expect(number.tenThousandHundredEleven.numberInFull()).toEqual('dez mil e cento e onze');
 
-    expect(number.elevenThousandOneHundred.numberInFull()).toEqual('onze mil e cem');
+    // expect(number.elevenThousand.numberInFull()).toEqual('onze mil');
 
-    expect(number.elevenThousandOneHundredTen.numberInFull()).toEqual('onze mil e cento e dez');
+    // expect(number.elevenThousandOneHundred.numberInFull()).toEqual('onze mil e cem');
 
-    expect(number.elevenThousandOneHundredEleven.numberInFull()).toEqual('onze mil e cento e onze');
+    // expect(number.elevenThousandOneHundredTen.numberInFull()).toEqual('onze mil e cento e dez');
 
-    expect(number.elevenThousandHundredTwelve.numberInFull()).toEqual('onze mil e cento e doze');
+    // expect(number.elevenThousandOneHundredEleven.numberInFull()).toEqual('onze mil e cento e onze');
 
-    expect(number.elevenThousandTwoHundredTen.numberInFull()).toEqual('onze mil e duzentos e dez');
+    // expect(number.elevenThousandHundredTwelve.numberInFull()).toEqual('onze mil e cento e doze');
 
-    expect(number.elevenThousandFourHundredSeventyEight.numberInFull()).toEqual(
-      'onze mil e quatrocentos e setenta e oito'
-    );
+    // expect(number.elevenThousandTwoHundredTen.numberInFull()).toEqual('onze mil e duzentos e dez');
 
-    expect(number.twentyThousandOneHundredFiftyNine.numberInFull()).toEqual('vinte mil e cento e cinquenta e nove');
+    // expect(number.elevenThousandFourHundredSeventyEight.numberInFull()).toEqual(
+    //   'onze mil e quatrocentos e setenta e oito'
+    // );
 
-    expect(number.fiftyOneThousandFifty.numberInFull()).toEqual('cinquenta e um mil e cinquenta');
+    // expect(number.twentyThousandOneHundredFiftyNine.numberInFull()).toEqual('vinte mil e cento e cinquenta e nove');
+
+    // expect(number.fiftyOneThousandFifty.numberInFull()).toEqual('cinquenta e um mil e cinquenta');
 
     const notFound = 1981129311293112;
     expect(notFound.numberInFull()).toEqual('não encontrado');

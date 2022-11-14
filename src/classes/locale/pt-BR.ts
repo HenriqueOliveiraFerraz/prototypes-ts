@@ -2,7 +2,7 @@ import { BaseLocale } from '../base-locale/base.locale';
 
 export class PtBr extends BaseLocale {
   constructor() {
-    super(generateNumbersWordsPtBr(), 'e', 'cento', 'não encontrado');
+    super(generateNumbersWordsPtBr(), 'e', 'cento', 'mil', 'não encontrado');
   }
 
   forbidUnits = false;
@@ -53,12 +53,13 @@ export class PtBr extends BaseLocale {
     const thousandsNum = num.substring(0, endIndex);
     const searchBaseNum = this.getTens(thousandsNum).result;
     const units = this.getUnits(thousandsNum.charAt(1)).result;
-    const thousands = this.numbersWords[1000];
     let result = '';
 
     if (thousandsNum != '0' && !this.forbidNextThousand) {
       this.forbidNextThousand = false;
-      result = result.concat(`${searchBaseNum.concat(`${units ? ` ${this.andMessage} ${units}` : ''}`)} ${thousands}`);
+      result = result.concat(
+        `${searchBaseNum.concat(`${units ? ` ${this.andMessage} ${units}` : ''}`)} ${this.thousandAuxiliary}`
+      );
     }
 
     this.forbidNextThousand = searchBaseNum !== undefined;
@@ -135,7 +136,7 @@ function generateNumbersWordsPtBr(): string[] {
   words[700] = 'setecentos';
   words[800] = 'oitocentos';
   words[900] = 'novecentos';
-  words[1000] = 'mil';
+  //words[1000] = 'mil';
 
   return words;
 }
