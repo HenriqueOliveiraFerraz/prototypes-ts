@@ -16,9 +16,12 @@ describe('numberInFull', () => {
 
   // it('axios', async () => {
   //   const responses: AxiosResponse<string, any>[] = [];
-  //   let number = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../mocks/numeros.mock.json'), 'utf8'));
+  //   let teste: { [key: number]: string } = {};
+  //   let number: { [key: string]: string } = JSON.parse(
+  //     fs.readFileSync(path.resolve(__dirname, '../mocks/numeros.mock.json'), 'utf8')
+  //   );
 
-  //   for (let index = 5127; index <= 10000; index++) {
+  //   for (let index = 10001; index <= 22000; index++) {
   //     const res = await getNumberInFull({
   //       acao: 'escrever_extenso',
   //       unidade: 'N',
@@ -56,13 +59,29 @@ describe('numberInFull', () => {
   //   await expect(responses).toBeTruthy();
   // }, 10000000);
 
-  test('numberInFull', () => {
-    let number = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../mocks/numeros.mock.json'), 'utf8'));
+  test('numberInFull', async () => {
+    let number: { [key: string]: string } = JSON.parse(
+      fs.readFileSync(path.resolve(__dirname, '../mocks/numeros.int.mock.json'), 'utf8')
+    );
+    //let teste: { [key: number]: string } = {};
 
     Object.keys(number).forEach((f, i) => {
-      const element = number[f];
+      const element = number[i];
+      //teste[i] = element;
       expect(i.numberInFull()).toEqual(element);
     });
+
+    // await fs.writeFile(
+    //   path.resolve(__dirname, '../mocks/numeros.int.mock.json'),
+    //   JSON.stringify(teste, null, 2),
+    //   (err) => {
+    //     if (err) {
+    //       console.log('Error writing file', err);
+    //     } else {
+    //       console.log('Successfully wrote file');
+    //     }
+    //   }
+    // );
     // expect(number.zero.numberInFull()).toEqual('zero');
 
     // expect(number.fifteen.numberInFull()).toEqual('quinze');
