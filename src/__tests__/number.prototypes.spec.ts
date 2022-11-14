@@ -83,7 +83,9 @@ describe('numberInFull', () => {
 
     expect(number.oneThousandTen.numberInFull()).toEqual('um mil e dez');
 
-    expect(number.thousandHundredFiftyNine.numberInFull()).toEqual('um mil e cento e cinquenta e nove');
+    expect(number.thousandHundredFiftyNine.numberInFull()).toEqual(
+      'um mil e cento e cinquenta e nove'
+    );
 
     expect(number.oneThousandTwoHundred.numberInFull()).toEqual('um mil e duzentos');
 
@@ -95,15 +97,21 @@ describe('numberInFull', () => {
 
     expect(number.twoThousandOne.numberInFull()).toEqual('dois mil e um');
 
-    expect(number.twoThousandFiveHundredFortySeven.numberInFull()).toEqual('dois mil e quinhentos e quarenta e sete');
+    expect(number.twoThousandFiveHundredFortySeven.numberInFull()).toEqual(
+      'dois mil e quinhentos e quarenta e sete'
+    );
 
-    expect(number.fiveThousandSevenHundredEightyNine.numberInFull()).toEqual('cinco mil e setecentos e oitenta e nove');
+    expect(number.fiveThousandSevenHundredEightyNine.numberInFull()).toEqual(
+      'cinco mil e setecentos e oitenta e nove'
+    );
 
     expect(number.nineThousand.numberInFull()).toEqual('nove mil');
 
     expect(number.nineThousandOneHundredOne.numberInFull()).toEqual('nove mil e cento e um');
 
-    expect(number.nineThousandNineHundredNinetyNine.numberInFull()).toEqual('nove mil e novecentos e noventa e nove');
+    expect(number.nineThousandNineHundredNinetyNine.numberInFull()).toEqual(
+      'nove mil e novecentos e noventa e nove'
+    );
 
     expect(number.tenThousand.numberInFull()).toEqual('dez mil');
 
@@ -135,7 +143,9 @@ describe('numberInFull', () => {
       'onze mil e quatrocentos e setenta e oito'
     );
 
-    expect(number.twentyThousandOneHundredFiftyNine.numberInFull()).toEqual('vinte mil e cento e cinquenta e nove');
+    expect(number.twentyThousandOneHundredFiftyNine.numberInFull()).toEqual(
+      'vinte mil e cento e cinquenta e nove'
+    );
 
     expect(number.fiftyOneThousandFifty.numberInFull()).toEqual('cinquenta e um mil e cinquenta');
 
