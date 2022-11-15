@@ -9,9 +9,15 @@ export class PtBr extends BaseLocale {
   forbidTens = false;
   forbidHundreds = false;
   forbidNextThousand = false;
+  lastTen = '';
 
   getUnits(num: string) {
-    const result = num != '0' && !this.forbidUnits ? this.numbersWords[Number(num)] : '';
+    if (this.lastTen.charAt(0) == '1' && this.lastTen.charAt(1) != '0') {
+      this.lastTen = '';
+      return '';
+    }
+
+    const result = num != '0' ? this.numbersWords[Number(num)] : '';
     this.forbidUnits = false;
     return result;
   }
@@ -30,6 +36,7 @@ export class PtBr extends BaseLocale {
     }
 
     this.forbidUnits = searchBaseNum !== undefined;
+    this.lastTen = num;
 
     return result;
   }
@@ -48,42 +55,23 @@ export class PtBr extends BaseLocale {
     return result;
   }
 
-  getThousands(num: string) {
-    const endIndex = this.getThousandEndIndex(num);
-    const thousandsNum = num.substring(0, endIndex);
-    let searchBaseNum = '';
-    let result = '';
+  // getOtherNums(num: string) {
+  //   const endIndex = this.getThousandEndIndex(num);
+  //   const otherNum = num.substring(0, endIndex);
+  //   let searchBaseNum = '';
+  //   let result = '';
 
-    searchBaseNum = searchBaseNum.concat(this.getNumberGroupInFull(thousandsNum));
+  //   searchBaseNum = searchBaseNum.concat(this.getNumberGroupInFull(otherNum));
 
-    // thousandsNum.split('').forEach((f, i) => {
-    //   const subGroup = thousandsNum.slice(i);
-    //   const numberGroupInFull = this.getNumberGroupInFull(subGroup);
+  //   if (otherNum != '0') {
+  //     result = result.concat(`${searchBaseNum} ${this.getAux(num)}`);
+  //   }
 
-    //   if (i == 0 && numberGroupInFull) {
-    //     searchBaseNum = searchBaseNum.concat(numberGroupInFull);
-    //   } else if (numberGroupInFull) {
-    //     searchBaseNum = searchBaseNum.concat(` ${this.andMessage} ` + numberGroupInFull);
-    //   }
-    // });
-
-    if (thousandsNum != '0') {
-      this.forbidNextThousand = false;
-      result = result.concat(`${searchBaseNum} ${this.getAux(num)}`);
-    }
-
-    this.forbidNextThousand = searchBaseNum != '';
-
-    return result;
-  }
+  //   return result;
+  // }
 
   getNumberGroupInFull(num: string) {
     switch (num.length) {
-      case 7:
-      case 6:
-      case 5:
-      case 4:
-        return this.getThousands(num);
       case 3:
         return this.getHundreds(num);
       case 2:
@@ -95,10 +83,10 @@ export class PtBr extends BaseLocale {
     }
   }
 
-  getAux(num: string) {
-    switch (num.length) {
+  getAuxiliaryWord(numLength: number, group: string) {
+    switch (numLength) {
       case 7:
-        return num.charAt(0) == '1' ? this.millionsSingularAuxiliary : this.millionsSingularAuxiliary;
+        return group.charAt(0) == '1' ? this.millionsSingularAuxiliary : this.millionsPluralAuxiliary;
       case 6:
       case 5:
       case 4:
@@ -108,9 +96,9 @@ export class PtBr extends BaseLocale {
     }
   }
 
-  getThousandEndIndex(num: string) {
-    return num.length > 6 ? 1 : num.length - 3;
-  }
+  // getThousandEndIndex(num: string) {
+  //   return num.length > 6 ? 1 : num.length - 3;
+  // }
 }
 
 function generateNumbersWordsPtBr(): string[] {

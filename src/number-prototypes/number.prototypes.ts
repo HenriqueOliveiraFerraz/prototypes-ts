@@ -17,24 +17,66 @@ Number.prototype.numberInFull = function (): string {
 
   if (result) {
     return result;
-  } else if (numString.length > 1) {
-    const amountOfGroups = Math.ceil(numString.length / 3);
-    numString.split('').forEach((f, i) => {
-      if (f != '0') {
-        const group = numString.slice(i).replace(/^0+/, '');
-        const numberGroupInFull = config.getNumberGroupInFull(group);
+  } else {
+    const numberGroups = num.getNumberGroups();
+    numberGroups.forEach((group, groupIndex) => {
+      if (group != '0') {
+        let auxiliaryAdded = false;
+        group.split('').forEach((subGroup, subGroupIndex) => {
+          if (subGroup && subGroup != '0') {
+            const formattedSubGroup = group.slice(subGroupIndex).replace(/^0+/, '');
+            const numberGroupInFull = config.getNumberGroupInFull(formattedSubGroup);
+            const aux = config.getAuxiliaryWord(numString.length - groupIndex, group);
 
-        if (i == 0 && numberGroupInFull) {
-          result = result.concat(`${numberGroupInFull}`);
-        } else if (numberGroupInFull) {
-          result = result.concat(` ${config.andMessage} ${numberGroupInFull}`);
-        }
+            if (!result && numberGroupInFull) {
+              result = result.concat(`${numberGroupInFull}`);
+            } else if (numberGroupInFull) {
+              result = result.concat(` ${config.andMessage} ${numberGroupInFull}`);
+            }
+
+            if (formattedSubGroup.length == 3) {
+              const hasNextGroup = numberGroups[groupIndex + 1];
+              const ten = Number(formattedSubGroup.charAt(1));
+              const unit = Number(formattedSubGroup.charAt(2));
+              const canAdd = unit == 0 && ten < 1;
+
+              if (canAdd && aux && hasNextGroup && !auxiliaryAdded) {
+                auxiliaryAdded = true;
+                result = result.concat(` ${aux}`);
+              }
+            } else {
+              const hasNextGroup = numberGroups[groupIndex + 1];
+              const ten = Number(formattedSubGroup.charAt(0));
+              const unit = Number(formattedSubGroup.charAt(1));
+              const canAdd = unit == 0;
+
+              if (canAdd && aux && hasNextGroup && !auxiliaryAdded) {
+                auxiliaryAdded = true;
+                result = result.concat(` ${aux}`);
+              }
+            }
+          }
+        });
       }
     });
+    // numString.split('').forEach((f, i) => {
+    //   if (f != '0') {
+    //     const group = numString.slice(i).replace(/^0+/, '');
+    //     const numberGroupInFull = config.getNumberGroupInFull(group);
+
+    //     if (i == 0 && numberGroupInFull) {
+    //       result = result.concat(`${numberGroupInFull}`);
+    //     } else if (numberGroupInFull) {
+    //       result = result.concat(` ${config.andMessage} ${numberGroupInFull}`);
+    //     }
+    //   }
+    // });
+
+    if (!result) {
+      return config.notFoundMessage;
+    }
 
     return result;
-  } else {
-    return config.notFoundMessage;
   }
 };
 
