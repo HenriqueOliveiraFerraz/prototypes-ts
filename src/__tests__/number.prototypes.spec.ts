@@ -66,21 +66,33 @@ describe('numberInFull', () => {
     // let number: { [key: number]: string } = JSON.parse(
     //   fs.readFileSync(path.resolve(__dirname, '../mocks/numeros.int.mock.json'), 'utf8')
     // );
-
     // Object.keys(number).forEach((f) => {
     //   const numIndex = Number(f);
     //   const element = number[numIndex];
     //   expect(numIndex.numberInFull()).toEqual(element);
     // });
+    //const notFound = 1981129311293112;
+    //expect(notFound.numberInFull()).toEqual('não encontrado');
+  });
+});
 
-    const notFound = 1981129311293112;
-    expect(notFound.numberInFull()).toEqual('não encontrado');
+describe('getNumberGroups', () => {
+  beforeAll(() => Config('pt-BR'));
+
+  test('getNumberGroups', () => {
+    expect(number.oneHundredNinety.getNumberGroups()).toEqual(['190']);
+    expect(number.oneThousandTen.getNumberGroups()).toEqual(['1', '010']);
+    expect(number.oneThousandFiveHundred.getNumberGroups()).toEqual(['1', '500']);
+    expect(number.twoThousandFiveHundredFortySeven.getNumberGroups()).toEqual(['2', '547']);
+    expect(number.nineThousand.getNumberGroups()).toEqual(['9', '000']);
+    expect(number.tenThousand.getNumberGroups()).toEqual(['10', '000']);
+    expect(number.elevenThousandFourHundredSeventyEight.getNumberGroups()).toEqual(['11', '478']);
+    expect(number.twentyThousandOneHundredFiftyNine.getNumberGroups()).toEqual(['20', '159']);
+    expect(number.fiftyOneThousandFifty.getNumberGroups()).toEqual(['51', '050']);
   });
 });
 
 describe('zerosAfterFirstNumber', () => {
-  beforeAll(() => Config('pt-BR'));
-
   test('zerosAfterFirstNumber', () => {
     expect(number.zero.zerosAfterFirstNumber()).toEqual(0);
 

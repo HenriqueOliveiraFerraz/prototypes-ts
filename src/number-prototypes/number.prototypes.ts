@@ -4,6 +4,7 @@ declare global {
   interface Number {
     numberInFull(): string;
     zerosAfterFirstNumber(): number;
+    getNumberGroups(): string[];
   }
 }
 
@@ -16,21 +17,11 @@ Number.prototype.numberInFull = function (): string {
 
   if (result) {
     return result;
-  } else {
-    if (numString.length <= 2) {
-      const tens = config.getTens(numString);
-      const units = config.getUnits(numString.charAt(1));
-
-      result = result.concat(tens);
-
-      if (units) {
-        result = result.concat(` ${config.andMessage} ${units}`);
-      }
-
-      return result;
-    } else if (numString.length >= 3 && numString.length <= 6) {
-      numString.split('').forEach((f, i) => {
-        const group = numString.slice(i);
+  } else if (numString.length > 1) {
+    const amountOfGroups = Math.ceil(numString.length / 3);
+    numString.split('').forEach((f, i) => {
+      if (f != '0') {
+        const group = numString.slice(i).replace(/^0+/, '');
         const numberGroupInFull = config.getNumberGroupInFull(group);
 
         if (i == 0 && numberGroupInFull) {
@@ -38,12 +29,12 @@ Number.prototype.numberInFull = function (): string {
         } else if (numberGroupInFull) {
           result = result.concat(` ${config.andMessage} ${numberGroupInFull}`);
         }
-      });
+      }
+    });
 
-      return result;
-    } else {
-      return config.notFoundMessage;
-    }
+    return result;
+  } else {
+    return config.notFoundMessage;
   }
 };
 
@@ -59,6 +50,13 @@ Number.prototype.zerosAfterFirstNumber = function (): number {
   });
 
   return zerosAfterFirstNumber;
+};
+
+Number.prototype.getNumberGroups = function (): string[] {
+  const numString = this.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const chunks: string[] = numString.split(',');
+
+  return chunks;
 };
 
 export {};

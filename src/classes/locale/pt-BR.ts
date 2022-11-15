@@ -29,7 +29,7 @@ export class PtBr extends BaseLocale {
       result = tens;
     }
 
-    this.forbidUnits = unitsNum == '0' || (tensNum != '0' && unitsNum != '0' && searchBaseNum !== undefined);
+    this.forbidUnits = searchBaseNum !== undefined;
 
     return result;
   }
@@ -54,29 +54,32 @@ export class PtBr extends BaseLocale {
     let searchBaseNum = '';
     let result = '';
 
-    thousandsNum.split('').forEach((f, i) => {
-      const subGroup = thousandsNum.slice(i);
-      const numberGroupInFull = this.getNumberGroupInFull(subGroup.length > 1 ? subGroup : f);
+    searchBaseNum = searchBaseNum.concat(this.getNumberGroupInFull(thousandsNum));
 
-      if (i == 0 && numberGroupInFull) {
-        searchBaseNum = searchBaseNum.concat(numberGroupInFull);
-      } else if (numberGroupInFull) {
-        searchBaseNum = searchBaseNum.concat(` ${this.andMessage} ` + numberGroupInFull);
-      }
-    });
+    // thousandsNum.split('').forEach((f, i) => {
+    //   const subGroup = thousandsNum.slice(i);
+    //   const numberGroupInFull = this.getNumberGroupInFull(subGroup);
 
-    if (thousandsNum != '0' && !this.forbidNextThousand) {
+    //   if (i == 0 && numberGroupInFull) {
+    //     searchBaseNum = searchBaseNum.concat(numberGroupInFull);
+    //   } else if (numberGroupInFull) {
+    //     searchBaseNum = searchBaseNum.concat(` ${this.andMessage} ` + numberGroupInFull);
+    //   }
+    // });
+
+    if (thousandsNum != '0') {
       this.forbidNextThousand = false;
-      result = result.concat(`${searchBaseNum} ${this.thousandAuxiliary}`);
+      result = result.concat(`${searchBaseNum} ${this.getAux(num)}`);
     }
 
-    this.forbidNextThousand = searchBaseNum !== undefined;
+    this.forbidNextThousand = searchBaseNum != '';
 
     return result;
   }
 
   getNumberGroupInFull(num: string) {
     switch (num.length) {
+      case 7:
       case 6:
       case 5:
       case 4:
@@ -92,8 +95,21 @@ export class PtBr extends BaseLocale {
     }
   }
 
+  getAux(num: string) {
+    switch (num.length) {
+      case 7:
+        return num.charAt(0) == '1' ? this.millionsSingularAuxiliary : this.millionsSingularAuxiliary;
+      case 6:
+      case 5:
+      case 4:
+        return this.thousandAuxiliary;
+      default:
+        break;
+    }
+  }
+
   getThousandEndIndex(num: string) {
-    return num.length - 3;
+    return num.length > 6 ? 1 : num.length - 3;
   }
 }
 
