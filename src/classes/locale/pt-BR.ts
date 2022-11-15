@@ -13,7 +13,7 @@ export class PtBr extends BaseLocale {
   getUnits(num: string) {
     const result = num != '0' && !this.forbidUnits ? this.numbersWords[Number(num)] : '';
     this.forbidUnits = false;
-    return { result: result };
+    return result;
   }
 
   getTens(num: string) {
@@ -31,7 +31,7 @@ export class PtBr extends BaseLocale {
 
     this.forbidUnits = unitsNum == '0' || (tensNum != '0' && unitsNum != '0' && searchBaseNum !== undefined);
 
-    return { result: result };
+    return result;
   }
 
   getHundreds(num: string) {
@@ -45,7 +45,7 @@ export class PtBr extends BaseLocale {
       result = hundreds;
     }
 
-    return { result: result };
+    return result;
   }
 
   getThousands(num: string) {
@@ -58,10 +58,10 @@ export class PtBr extends BaseLocale {
       const subGroup = thousandsNum.slice(i);
       const numberGroupInFull = this.getNumberGroupInFull(subGroup.length > 1 ? subGroup : f);
 
-      if (i == 0 && numberGroupInFull.result) {
-        searchBaseNum = searchBaseNum.concat(numberGroupInFull.result);
-      } else if (numberGroupInFull.result) {
-        searchBaseNum = searchBaseNum.concat(` ${this.andMessage} ` + numberGroupInFull.result);
+      if (i == 0 && numberGroupInFull) {
+        searchBaseNum = searchBaseNum.concat(numberGroupInFull);
+      } else if (numberGroupInFull) {
+        searchBaseNum = searchBaseNum.concat(` ${this.andMessage} ` + numberGroupInFull);
       }
     });
 
@@ -72,7 +72,7 @@ export class PtBr extends BaseLocale {
 
     this.forbidNextThousand = searchBaseNum !== undefined;
 
-    return { result: result };
+    return result;
   }
 
   getNumberGroupInFull(num: string) {
@@ -88,7 +88,7 @@ export class PtBr extends BaseLocale {
       case 1:
         return this.getUnits(num);
       default:
-        return { result: '' };
+        return '';
     }
   }
 

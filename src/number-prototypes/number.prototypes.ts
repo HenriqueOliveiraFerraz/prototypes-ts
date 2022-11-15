@@ -21,10 +21,10 @@ Number.prototype.numberInFull = function (): string {
       const tens = config.getTens(numString);
       const units = config.getUnits(numString.charAt(1));
 
-      result = result.concat(tens.result);
+      result = result.concat(tens);
 
-      if (units.result) {
-        result = result.concat(` ${config.andMessage} ${units.result}`);
+      if (units) {
+        result = result.concat(` ${config.andMessage} ${units}`);
       }
 
       return result;
@@ -33,10 +33,10 @@ Number.prototype.numberInFull = function (): string {
         const group = numString.slice(i);
         const numberGroupInFull = config.getNumberGroupInFull(group);
 
-        if (i == 0 && numberGroupInFull.result) {
-          result = result.concat(`${numberGroupInFull.result}`);
-        } else if (numberGroupInFull.result) {
-          result = result.concat(` ${config.andMessage} ${numberGroupInFull.result}`);
+        if (i == 0 && numberGroupInFull) {
+          result = result.concat(`${numberGroupInFull}`);
+        } else if (numberGroupInFull) {
+          result = result.concat(` ${config.andMessage} ${numberGroupInFull}`);
         }
       });
 
