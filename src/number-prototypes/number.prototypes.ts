@@ -28,7 +28,7 @@ Number.prototype.numberInFull = function (): string {
       }
 
       return result;
-    } else if (numString.length >= 3 && numString.length <= 5) {
+    } else if (numString.length >= 3 && numString.length <= 6) {
       numString.split('').forEach((f, i) => {
         const group = numString.slice(i);
         const numberGroupInFull = config.getNumberGroupInFull(group);

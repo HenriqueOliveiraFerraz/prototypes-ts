@@ -51,15 +51,23 @@ export class PtBr extends BaseLocale {
   getThousands(num: string) {
     const endIndex = this.getThousandEndIndex(num);
     const thousandsNum = num.substring(0, endIndex);
-    const searchBaseNum = this.getTens(thousandsNum).result;
-    const units = this.getUnits(thousandsNum.charAt(1)).result;
+    let searchBaseNum = '';
     let result = '';
+
+    thousandsNum.split('').forEach((f, i) => {
+      const subGroup = thousandsNum.slice(i);
+      const numberGroupInFull = this.getNumberGroupInFull(subGroup.length > 1 ? subGroup : f);
+
+      if (i == 0 && numberGroupInFull.result) {
+        searchBaseNum = searchBaseNum.concat(numberGroupInFull.result);
+      } else if (numberGroupInFull.result) {
+        searchBaseNum = searchBaseNum.concat(` ${this.andMessage} ` + numberGroupInFull.result);
+      }
+    });
 
     if (thousandsNum != '0' && !this.forbidNextThousand) {
       this.forbidNextThousand = false;
-      result = result.concat(
-        `${searchBaseNum.concat(`${units ? ` ${this.andMessage} ${units}` : ''}`)} ${this.thousandAuxiliary}`
-      );
+      result = result.concat(`${searchBaseNum} ${this.thousandAuxiliary}`);
     }
 
     this.forbidNextThousand = searchBaseNum !== undefined;
@@ -69,6 +77,7 @@ export class PtBr extends BaseLocale {
 
   getNumberGroupInFull(num: string) {
     switch (num.length) {
+      case 6:
       case 5:
       case 4:
         return this.getThousands(num);
@@ -84,14 +93,7 @@ export class PtBr extends BaseLocale {
   }
 
   getThousandEndIndex(num: string) {
-    switch (num.length) {
-      case 5:
-        return 2;
-      case 4:
-        return 1;
-      default:
-        return undefined;
-    }
+    return num.length - 3;
   }
 }
 
