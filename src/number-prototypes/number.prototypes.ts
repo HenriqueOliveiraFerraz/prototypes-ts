@@ -50,15 +50,15 @@ Number.prototype.numberInFull = function (): string {
 Number.prototype.zerosAfterFirstNumber = function (): number {
   const num = Number(this);
   const numString = num.toString();
-  let zerosAfterTens = 0;
+  let zerosAfterFirstNumber = 0;
 
   numString.split('').forEach((f, i) => {
     if (i >= 1 && f == '0') {
-      zerosAfterTens++;
+      zerosAfterFirstNumber++;
     }
   });
 
-  return zerosAfterTens;
+  return zerosAfterFirstNumber;
 };
 
 export {};

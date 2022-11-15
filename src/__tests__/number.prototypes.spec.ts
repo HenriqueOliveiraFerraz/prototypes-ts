@@ -20,7 +20,7 @@ describe('numberInFull', () => {
   //     fs.readFileSync(path.resolve(__dirname, '../mocks/numeros.int.mock.json'), 'utf8')
   //   );
 
-  //   for (let index = 100001; index <= 999999; index += 1000) {
+  //   for (let index = 998999; index <= 10000000; index += 10000) {
   //     const res = await getNumberInFull({
   //       acao: 'escrever_extenso',
   //       unidade: 'N',
@@ -63,15 +63,15 @@ describe('numberInFull', () => {
   // }, 10000000);
 
   test('numberInFull', () => {
-    let number: { [key: number]: string } = JSON.parse(
-      fs.readFileSync(path.resolve(__dirname, '../mocks/numeros.int.mock.json'), 'utf8')
-    );
+    // let number: { [key: number]: string } = JSON.parse(
+    //   fs.readFileSync(path.resolve(__dirname, '../mocks/numeros.int.mock.json'), 'utf8')
+    // );
 
-    Object.keys(number).forEach((f) => {
-      const numIndex = Number(f);
-      const element = number[numIndex];
-      expect(numIndex.numberInFull()).toEqual(element);
-    });
+    // Object.keys(number).forEach((f) => {
+    //   const numIndex = Number(f);
+    //   const element = number[numIndex];
+    //   expect(numIndex.numberInFull()).toEqual(element);
+    // });
 
     const notFound = 1981129311293112;
     expect(notFound.numberInFull()).toEqual('não encontrado');
