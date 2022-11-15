@@ -25,7 +25,6 @@ export class PtBr extends BaseLocale {
   getTens(num: string) {
     const tensNum = num.charAt(0);
     const tens = this.numbersWords[Number(`${num.charAt(0)}0`)];
-    const unitsNum = num.charAt(1);
     const searchBaseNum = this.numbersWords[Number(num)];
     let result = '';
 
@@ -55,21 +54,6 @@ export class PtBr extends BaseLocale {
     return result;
   }
 
-  // getOtherNums(num: string) {
-  //   const endIndex = this.getThousandEndIndex(num);
-  //   const otherNum = num.substring(0, endIndex);
-  //   let searchBaseNum = '';
-  //   let result = '';
-
-  //   searchBaseNum = searchBaseNum.concat(this.getNumberGroupInFull(otherNum));
-
-  //   if (otherNum != '0') {
-  //     result = result.concat(`${searchBaseNum} ${this.getAux(num)}`);
-  //   }
-
-  //   return result;
-  // }
-
   getNumberGroupInFull(num: string) {
     switch (num.length) {
       case 3:
@@ -95,10 +79,6 @@ export class PtBr extends BaseLocale {
         break;
     }
   }
-
-  // getThousandEndIndex(num: string) {
-  //   return num.length > 6 ? 1 : num.length - 3;
-  // }
 }
 
 function generateNumbersWordsPtBr(): string[] {
@@ -142,7 +122,6 @@ function generateNumbersWordsPtBr(): string[] {
   words[700] = 'setecentos';
   words[800] = 'oitocentos';
   words[900] = 'novecentos';
-  //words[1000] = 'mil';
 
   return words;
 }

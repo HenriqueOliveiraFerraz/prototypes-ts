@@ -46,7 +46,6 @@ Number.prototype.numberInFull = function (): string {
               }
             } else {
               const hasNextGroup = numberGroups[groupIndex + 1];
-              const ten = Number(formattedSubGroup.charAt(0));
               const unit = Number(formattedSubGroup.charAt(1));
               const canAdd = unit == 0;
 
@@ -59,18 +58,6 @@ Number.prototype.numberInFull = function (): string {
         });
       }
     });
-    // numString.split('').forEach((f, i) => {
-    //   if (f != '0') {
-    //     const group = numString.slice(i).replace(/^0+/, '');
-    //     const numberGroupInFull = config.getNumberGroupInFull(group);
-
-    //     if (i == 0 && numberGroupInFull) {
-    //       result = result.concat(`${numberGroupInFull}`);
-    //     } else if (numberGroupInFull) {
-    //       result = result.concat(` ${config.andMessage} ${numberGroupInFull}`);
-    //     }
-    //   }
-    // });
 
     if (!result) {
       return config.notFoundMessage;
