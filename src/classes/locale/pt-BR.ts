@@ -2,7 +2,7 @@ import { BaseLocale } from '../base-locale/base.locale';
 
 export class PtBr extends BaseLocale {
   constructor() {
-    super(generateNumbersWordsPtBr(), 'e', 'cento', 'mil', 'não encontrado');
+    super(generateNumbersWordsPtBr(), 'e', 'cento', 'mil', 'milhão', 'milhões', 'não encontrado');
   }
 
   forbidUnits = false;
