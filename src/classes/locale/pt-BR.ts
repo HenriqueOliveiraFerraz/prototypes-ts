@@ -84,29 +84,34 @@ export class PtBr extends BaseLocale {
   }
 
   getAuxiliaryWord(numLength: number, group: string) {
+    const auxWordSuffixSingular = 'lhão';
+    const auxWordSuffixPlural = 'lhões';
     switch (numLength) {
+      case 21:
+      case 20:
+        return `quinti${auxWordSuffixPlural}`;
       case 19:
-        return group.charAt(0) == '1' ? this.quintillionsSingularAuxiliary : this.quintillionsPluralAuxiliary;
+        return group.charAt(0) == '1' ? `quinti${auxWordSuffixSingular}` : `quinti${auxWordSuffixPlural}`;
       case 18:
       case 17:
-        return this.quadrillionsPluralAuxiliary;
+        return `quatri${auxWordSuffixPlural}`;
       case 16:
-        return group.charAt(0) == '1' ? this.quadrillionsSingularAuxiliary : this.quadrillionsPluralAuxiliary;
+        return group.charAt(0) == '1' ? `quatri${auxWordSuffixSingular}` : `quatri${auxWordSuffixPlural}`;
       case 15:
       case 14:
-        return this.trillionsPluralAuxiliary;
+        return `tri${auxWordSuffixPlural}`;
       case 13:
-        return group.charAt(0) == '1' ? this.trillionsSingularAuxiliary : this.trillionsPluralAuxiliary;
+        return group.charAt(0) == '1' ? `tri${auxWordSuffixSingular}` : `tri${auxWordSuffixPlural}`;
       case 12:
       case 11:
-        return this.billionsPluralAuxiliary;
+        return `bi${auxWordSuffixPlural}`;
       case 10:
-        return group.charAt(0) == '1' ? this.billionsSingularAuxiliary : this.billionsPluralAuxiliary;
+        return group.charAt(0) == '1' ? `bi${auxWordSuffixSingular}` : `bi${auxWordSuffixPlural}`;
       case 9:
       case 8:
-        return this.millionsPluralAuxiliary;
+        return `mi${auxWordSuffixPlural}`;
       case 7:
-        return group.charAt(0) == '1' ? this.millionsSingularAuxiliary : this.millionsPluralAuxiliary;
+        return group.charAt(0) == '1' ? `mi${auxWordSuffixSingular}` : `mi${auxWordSuffixPlural}`;
       case 6:
       case 5:
       case 4:
