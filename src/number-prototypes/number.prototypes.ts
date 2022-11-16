@@ -26,7 +26,8 @@ Number.prototype.numberInFull = function (): string {
           if (subGroup && subGroup != '0') {
             const formattedSubGroup = group.slice(subGroupIndex).replace(/^0+/, '');
             const numberGroupInFull = config.getNumberGroupInFull(formattedSubGroup);
-            const aux = config.getAuxiliaryWord(numString.length - (groupIndex + subGroupIndex), group);
+            const gruopRemainder = numberGroups.slice(groupIndex).join('');
+            const aux = config.getAuxiliaryWord(gruopRemainder.length, group);
 
             if (!result && numberGroupInFull) {
               result = result.concat(`${numberGroupInFull}`);

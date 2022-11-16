@@ -63,14 +63,14 @@ describe('numberInFull', () => {
   // }, 10000000);
 
   test('numberInFull', () => {
-    // let number: { [key: number]: string } = JSON.parse(
-    //   fs.readFileSync(path.resolve(__dirname, '../mocks/numeros.int.mock.json'), 'utf8')
-    // );
-    // Object.keys(number).forEach((f) => {
-    //   const numIndex = Number(f);
-    //   const element = number[numIndex];
-    //   expect(numIndex.numberInFull()).toEqual(element);
-    // });
+    let number: { [key: number]: string } = JSON.parse(
+      fs.readFileSync(path.resolve(__dirname, '../mocks/numeros.int.mock.json'), 'utf8')
+    );
+    Object.keys(number).forEach((f) => {
+      const numIndex = Number(f);
+      const element = number[numIndex];
+      expect(numIndex.numberInFull()).toEqual(element);
+    });
   });
 });
 

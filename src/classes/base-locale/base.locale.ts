@@ -8,6 +8,12 @@ export class BaseLocale {
     millionsPluralAuxiliary: string,
     billionsSingularAuxiliary: string,
     billionsPluralAuxiliary: string,
+    trillionsSingularAuxiliary: string,
+    trillionsPluralAuxiliary: string,
+    quadrillionsSingularAuxiliary: string,
+    quadrillionsPluralAuxiliary: string,
+    quintillionsSingularAuxiliary: string,
+    quintillionsPluralAuxiliary: string,
     notFoundMessage: string
   ) {
     this.numbersWords = numbersWords;
@@ -18,6 +24,12 @@ export class BaseLocale {
     this.millionsPluralAuxiliary = millionsPluralAuxiliary;
     this.billionsSingularAuxiliary = billionsSingularAuxiliary;
     this.billionsPluralAuxiliary = billionsPluralAuxiliary;
+    this.trillionsSingularAuxiliary = trillionsSingularAuxiliary;
+    this.trillionsPluralAuxiliary = trillionsPluralAuxiliary;
+    this.quadrillionsSingularAuxiliary = quadrillionsSingularAuxiliary;
+    this.quadrillionsPluralAuxiliary = quadrillionsPluralAuxiliary;
+    this.quintillionsSingularAuxiliary = quintillionsSingularAuxiliary;
+    this.quintillionsPluralAuxiliary = quintillionsPluralAuxiliary;
     this.notFoundMessage = notFoundMessage;
   }
 
@@ -29,5 +41,11 @@ export class BaseLocale {
   millionsPluralAuxiliary: string;
   billionsSingularAuxiliary: string;
   billionsPluralAuxiliary: string;
+  trillionsSingularAuxiliary: string;
+  trillionsPluralAuxiliary: string;
+  quadrillionsSingularAuxiliary: string;
+  quadrillionsPluralAuxiliary: string;
+  quintillionsSingularAuxiliary: string;
+  quintillionsPluralAuxiliary: string;
   notFoundMessage: string;
 }
