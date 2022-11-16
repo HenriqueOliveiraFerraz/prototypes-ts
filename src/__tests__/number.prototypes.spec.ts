@@ -20,7 +20,7 @@ describe('numberInFull', () => {
   //     fs.readFileSync(path.resolve(__dirname, '../mocks/numeros.int.mock.json'), 'utf8')
   //   );
 
-  //   for (let index = 998999; index <= 10000000; index += 10000) {
+  //   for (let index = 1000000001; index <= 10000000000; index += 10000000) {
   //     const res = await getNumberInFull({
   //       acao: 'escrever_extenso',
   //       unidade: 'N',

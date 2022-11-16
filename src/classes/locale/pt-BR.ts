@@ -2,7 +2,7 @@ import { BaseLocale } from '../base-locale/base.locale';
 
 export class PtBr extends BaseLocale {
   constructor() {
-    super(generateNumbersWordsPtBr(), 'e', 'cento', 'mil', 'milhão', 'milhões', 'não encontrado');
+    super(generateNumbersWordsPtBr(), 'e', 'cento', 'mil', 'milhão', 'milhões', 'bilhão', 'bilhões', 'não encontrado');
   }
 
   forbidUnits = false;
@@ -69,6 +69,12 @@ export class PtBr extends BaseLocale {
 
   getAuxiliaryWord(numLength: number, group: string) {
     switch (numLength) {
+      case 10:
+        return group.charAt(0) == '1' ? this.billionsSingularAuxiliary : this.billionsPluralAuxiliary;
+      case 9:
+        return this.millionsPluralAuxiliary;
+      case 8:
+        return this.millionsPluralAuxiliary;
       case 7:
         return group.charAt(0) == '1' ? this.millionsSingularAuxiliary : this.millionsPluralAuxiliary;
       case 6:

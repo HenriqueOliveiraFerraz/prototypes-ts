@@ -6,6 +6,8 @@ export class BaseLocale {
     thousandAuxiliary: string,
     millionsSingularAuxiliary: string,
     millionsPluralAuxiliary: string,
+    billionsSingularAuxiliary: string,
+    billionsPluralAuxiliary: string,
     notFoundMessage: string
   ) {
     this.numbersWords = numbersWords;
@@ -14,6 +16,8 @@ export class BaseLocale {
     this.thousandAuxiliary = thousandAuxiliary;
     this.millionsSingularAuxiliary = millionsSingularAuxiliary;
     this.millionsPluralAuxiliary = millionsPluralAuxiliary;
+    this.billionsSingularAuxiliary = billionsSingularAuxiliary;
+    this.billionsPluralAuxiliary = billionsPluralAuxiliary;
     this.notFoundMessage = notFoundMessage;
   }
 
@@ -23,5 +27,7 @@ export class BaseLocale {
   thousandAuxiliary: string;
   millionsSingularAuxiliary: string;
   millionsPluralAuxiliary: string;
+  billionsSingularAuxiliary: string;
+  billionsPluralAuxiliary: string;
   notFoundMessage: string;
 }

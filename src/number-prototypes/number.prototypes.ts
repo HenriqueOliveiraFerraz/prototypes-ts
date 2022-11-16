@@ -26,7 +26,7 @@ Number.prototype.numberInFull = function (): string {
           if (subGroup && subGroup != '0') {
             const formattedSubGroup = group.slice(subGroupIndex).replace(/^0+/, '');
             const numberGroupInFull = config.getNumberGroupInFull(formattedSubGroup);
-            const aux = config.getAuxiliaryWord(numString.length - groupIndex, group);
+            const aux = config.getAuxiliaryWord(numString.length - (groupIndex + subGroupIndex), group);
 
             if (!result && numberGroupInFull) {
               result = result.concat(`${numberGroupInFull}`);
@@ -44,12 +44,19 @@ Number.prototype.numberInFull = function (): string {
                 auxiliaryAdded = true;
                 result = result.concat(` ${aux}`);
               }
-            } else {
+            } else if (formattedSubGroup.length == 2) {
               const hasNextGroup = numberGroups[groupIndex + 1];
-              const unit = Number(formattedSubGroup.charAt(1));
-              const canAdd = unit == 0;
+              const ten = Number(formattedSubGroup);
+              const canAdd = (ten >= 10 && ten <= 20) || ten % 10 == 0;
 
               if (canAdd && aux && hasNextGroup && !auxiliaryAdded) {
+                auxiliaryAdded = true;
+                result = result.concat(` ${aux}`);
+              }
+            } else {
+              const hasNextGroup = numberGroups[groupIndex + 1];
+
+              if (aux && hasNextGroup && !auxiliaryAdded) {
                 auxiliaryAdded = true;
                 result = result.concat(` ${aux}`);
               }
