@@ -2,66 +2,11 @@
 import '../number-prototypes/number.prototypes';
 import { Config } from '../index';
 import { number } from '../mocks/numbers.mock';
-import { NumeroExtensoRequest } from '../http-clients/for-devs/interfaces/numero.extenso';
-import { getArrayNumbersInFull, getNumberInFull } from '../http-clients/for-devs/for.devs';
-import axios, { AxiosResponse, formToJSON } from 'axios';
 import * as fs from 'fs';
 import * as path from 'path';
-import * as fileContent from '../mocks/numeros.mock.json';
 
 describe('numberInFull', () => {
   beforeAll(() => Config('pt-BR'));
-
-  const pause = (ms: number) => new Promise((res) => setTimeout(res, ms));
-
-  // it('axios', async () => {
-  //   const responses: AxiosResponse<string, any>[] = [];
-  //   let number: { [key: number]: string } = JSON.parse(
-  //     fs.readFileSync(path.resolve(__dirname, '../mocks/numeros.int.mock.json'), 'utf8')
-  //   );
-
-  //   for (let index = 96863565462801200; index <= 9686356546280120000; index += 4880040000000001) {
-  //     const res = await getNumberInFull({
-  //       acao: 'escrever_extenso',
-  //       unidade: 'N',
-  //       txt_valor: index.toString(),
-  //       tipo_letra: 'mi'
-  //     });
-  //     const numberInFull = res.data.trim();
-
-  //     res.data = res.data.trim();
-  //     res.data = res.data.capitalizeFirstLetter();
-  //     res.data = res.data
-  //       .split(' ')
-  //       .map((f) => {
-  //         f = f.capitalizeFirstLetter();
-  //         return f;
-  //       })
-  //       .join('');
-  //     res.data.replace(/\s/g, '');
-  //     res.data = res.data.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-
-  //     number[index] = numberInFull;
-
-  //     responses.push(res);
-  //     await pause(200);
-
-  //     await fs.writeFile(
-  //       path.resolve(__dirname, '../mocks/numeros.int.mock.json'),
-  //       JSON.stringify(number, null, 2),
-  //       (err) => {
-  //         if (err) {
-  //           console.log('Error writing file', err);
-  //         } else {
-  //           console.log('Successfully wrote file');
-  //         }
-  //       }
-  //     );
-  //   }
-
-  //   await expect(responses).toBeTruthy();
-  // }, 10000000);
-
   test('numberInFull', () => {
     let number: { [key: number]: string } = JSON.parse(
       fs.readFileSync(path.resolve(__dirname, '../mocks/numeros.int.mock.json'), 'utf8')

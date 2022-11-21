@@ -87,6 +87,21 @@ export class PtBr extends BaseLocale {
     const auxWordSuffixSingular = 'lhão';
     const auxWordSuffixPlural = 'lhões';
     switch (numLength) {
+      case 30:
+      case 29:
+        return `noni${auxWordSuffixPlural}`;
+      case 28:
+        return group.charAt(0) == '1' ? `noni${auxWordSuffixSingular}` : `noni${auxWordSuffixPlural}`;
+      case 27:
+      case 26:
+        return `octi${auxWordSuffixPlural}`;
+      case 25:
+        return group.charAt(0) == '1' ? `octi${auxWordSuffixSingular}` : `octi${auxWordSuffixPlural}`;
+      case 24:
+      case 23:
+        return `sep${auxWordSuffixPlural}`;
+      case 22:
+        return group.charAt(0) == '1' ? `sep${auxWordSuffixSingular}` : `sep${auxWordSuffixPlural}`;
       case 21:
       case 20:
         return `quinti${auxWordSuffixPlural}`;

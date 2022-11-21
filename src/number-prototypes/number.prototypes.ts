@@ -10,7 +10,6 @@ declare global {
 
 Number.prototype.numberInFull = function (): string {
   const num = Number(this);
-  const numString = this.toString();
   const config = Configuration.createBaseLocaleExtension();
 
   let result = config.numbersWords[num] ?? '';
@@ -66,10 +65,6 @@ Number.prototype.numberInFull = function (): string {
         });
       }
     });
-
-    if (!result) {
-      return config.notFoundMessage;
-    }
 
     return result;
   }
