@@ -2,16 +2,38 @@ import { BaseLocale } from '../base-locale/base.locale';
 
 export class PtBr extends BaseLocale {
   constructor() {
-    super(generateNumbersWordsPtBr(), 'e', 'cento', 'mil', 'milhão', 'milhões', 'não encontrado');
+    super(
+      generateNumbersWordsPtBr(),
+      'e',
+      'cento',
+      'mil',
+      'milhão',
+      'milhões',
+      'bilhão',
+      'bilhões',
+      'trilhão',
+      'trilhões',
+      'quatrilhão',
+      'quatrilhões',
+      'quintilhão',
+      'quintilhões',
+      'não encontrado'
+    );
   }
 
   forbidUnits = false;
   forbidTens = false;
   forbidHundreds = false;
   forbidNextThousand = false;
+  lastTen = '';
 
   getUnits(num: string) {
-    const result = num != '0' && !this.forbidUnits ? this.numbersWords[Number(num)] : '';
+    if (this.lastTen.charAt(0) == '1' && this.lastTen.charAt(1) != '0') {
+      this.lastTen = '';
+      return '';
+    }
+
+    const result = num != '0' ? this.numbersWords[Number(num)] : '';
     this.forbidUnits = false;
     return result;
   }
@@ -19,7 +41,6 @@ export class PtBr extends BaseLocale {
   getTens(num: string) {
     const tensNum = num.charAt(0);
     const tens = this.numbersWords[Number(`${num.charAt(0)}0`)];
-    const unitsNum = num.charAt(1);
     const searchBaseNum = this.numbersWords[Number(num)];
     let result = '';
 
@@ -29,7 +50,8 @@ export class PtBr extends BaseLocale {
       result = tens;
     }
 
-    this.forbidUnits = unitsNum == '0' || (tensNum != '0' && unitsNum != '0' && searchBaseNum !== undefined);
+    this.forbidUnits = searchBaseNum !== undefined;
+    this.lastTen = num;
 
     return result;
   }
@@ -48,39 +70,8 @@ export class PtBr extends BaseLocale {
     return result;
   }
 
-  getThousands(num: string) {
-    const endIndex = this.getThousandEndIndex(num);
-    const thousandsNum = num.substring(0, endIndex);
-    let searchBaseNum = '';
-    let result = '';
-
-    thousandsNum.split('').forEach((f, i) => {
-      const subGroup = thousandsNum.slice(i);
-      const numberGroupInFull = this.getNumberGroupInFull(subGroup.length > 1 ? subGroup : f);
-
-      if (i == 0 && numberGroupInFull) {
-        searchBaseNum = searchBaseNum.concat(numberGroupInFull);
-      } else if (numberGroupInFull) {
-        searchBaseNum = searchBaseNum.concat(` ${this.andMessage} ` + numberGroupInFull);
-      }
-    });
-
-    if (thousandsNum != '0' && !this.forbidNextThousand) {
-      this.forbidNextThousand = false;
-      result = result.concat(`${searchBaseNum} ${this.thousandAuxiliary}`);
-    }
-
-    this.forbidNextThousand = searchBaseNum !== undefined;
-
-    return result;
-  }
-
   getNumberGroupInFull(num: string) {
     switch (num.length) {
-      case 6:
-      case 5:
-      case 4:
-        return this.getThousands(num);
       case 3:
         return this.getHundreds(num);
       case 2:
@@ -92,8 +83,57 @@ export class PtBr extends BaseLocale {
     }
   }
 
-  getThousandEndIndex(num: string) {
-    return num.length - 3;
+  getAuxiliaryWord(numLength: number, group: string) {
+    const auxWordSuffixSingular = 'lhão';
+    const auxWordSuffixPlural = 'lhões';
+    switch (numLength) {
+      case 30:
+      case 29:
+        return `noni${auxWordSuffixPlural}`;
+      case 28:
+        return group.charAt(0) == '1' ? `noni${auxWordSuffixSingular}` : `noni${auxWordSuffixPlural}`;
+      case 27:
+      case 26:
+        return `octi${auxWordSuffixPlural}`;
+      case 25:
+        return group.charAt(0) == '1' ? `octi${auxWordSuffixSingular}` : `octi${auxWordSuffixPlural}`;
+      case 24:
+      case 23:
+        return `sep${auxWordSuffixPlural}`;
+      case 22:
+        return group.charAt(0) == '1' ? `sep${auxWordSuffixSingular}` : `sep${auxWordSuffixPlural}`;
+      case 21:
+      case 20:
+        return `quinti${auxWordSuffixPlural}`;
+      case 19:
+        return group.charAt(0) == '1' ? `quinti${auxWordSuffixSingular}` : `quinti${auxWordSuffixPlural}`;
+      case 18:
+      case 17:
+        return `quatri${auxWordSuffixPlural}`;
+      case 16:
+        return group.charAt(0) == '1' ? `quatri${auxWordSuffixSingular}` : `quatri${auxWordSuffixPlural}`;
+      case 15:
+      case 14:
+        return `tri${auxWordSuffixPlural}`;
+      case 13:
+        return group.charAt(0) == '1' ? `tri${auxWordSuffixSingular}` : `tri${auxWordSuffixPlural}`;
+      case 12:
+      case 11:
+        return `bi${auxWordSuffixPlural}`;
+      case 10:
+        return group.charAt(0) == '1' ? `bi${auxWordSuffixSingular}` : `bi${auxWordSuffixPlural}`;
+      case 9:
+      case 8:
+        return `mi${auxWordSuffixPlural}`;
+      case 7:
+        return group.charAt(0) == '1' ? `mi${auxWordSuffixSingular}` : `mi${auxWordSuffixPlural}`;
+      case 6:
+      case 5:
+      case 4:
+        return this.thousandAuxiliary;
+      default:
+        break;
+    }
   }
 }
 
@@ -138,7 +178,6 @@ function generateNumbersWordsPtBr(): string[] {
   words[700] = 'setecentos';
   words[800] = 'oitocentos';
   words[900] = 'novecentos';
-  //words[1000] = 'mil';
 
   return words;
 }

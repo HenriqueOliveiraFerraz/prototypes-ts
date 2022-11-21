@@ -4,12 +4,12 @@ declare global {
   interface Number {
     numberInFull(): string;
     zerosAfterFirstNumber(): number;
+    getNumberGroups(): string[];
   }
 }
 
 Number.prototype.numberInFull = function (): string {
   const num = Number(this);
-  const numString = this.toString();
   const config = Configuration.createBaseLocaleExtension();
 
   let result = config.numbersWords[num] ?? '';
@@ -17,33 +17,56 @@ Number.prototype.numberInFull = function (): string {
   if (result) {
     return result;
   } else {
-    if (numString.length <= 2) {
-      const tens = config.getTens(numString);
-      const units = config.getUnits(numString.charAt(1));
+    const numberGroups = num.getNumberGroups();
+    numberGroups.forEach((group, groupIndex) => {
+      if (group != '0') {
+        let auxiliaryAdded = false;
+        group.split('').forEach((subGroup, subGroupIndex) => {
+          if (subGroup && subGroup != '0') {
+            const formattedSubGroup = group.slice(subGroupIndex).replace(/^0+/, '');
+            const numberGroupInFull = config.getNumberGroupInFull(formattedSubGroup);
+            const gruopRemainder = numberGroups.slice(groupIndex).join('');
+            const aux = config.getAuxiliaryWord(gruopRemainder.length, group);
 
-      result = result.concat(tens);
+            if (!result && numberGroupInFull) {
+              result = result.concat(`${numberGroupInFull}`);
+            } else if (numberGroupInFull) {
+              result = result.concat(` ${config.andMessage} ${numberGroupInFull}`);
+            }
 
-      if (units) {
-        result = result.concat(` ${config.andMessage} ${units}`);
+            if (formattedSubGroup.length == 3) {
+              const hasNextGroup = numberGroups[groupIndex + 1];
+              const ten = Number(formattedSubGroup.charAt(1));
+              const unit = Number(formattedSubGroup.charAt(2));
+              const canAdd = unit == 0 && ten < 1;
+
+              if (canAdd && aux && hasNextGroup && !auxiliaryAdded) {
+                auxiliaryAdded = true;
+                result = result.concat(` ${aux}`);
+              }
+            } else if (formattedSubGroup.length == 2) {
+              const hasNextGroup = numberGroups[groupIndex + 1];
+              const ten = Number(formattedSubGroup);
+              const canAdd = (ten >= 10 && ten <= 20) || ten % 10 == 0;
+
+              if (canAdd && aux && hasNextGroup && !auxiliaryAdded) {
+                auxiliaryAdded = true;
+                result = result.concat(` ${aux}`);
+              }
+            } else {
+              const hasNextGroup = numberGroups[groupIndex + 1];
+
+              if (aux && hasNextGroup && !auxiliaryAdded) {
+                auxiliaryAdded = true;
+                result = result.concat(` ${aux}`);
+              }
+            }
+          }
+        });
       }
+    });
 
-      return result;
-    } else if (numString.length >= 3 && numString.length <= 6) {
-      numString.split('').forEach((f, i) => {
-        const group = numString.slice(i);
-        const numberGroupInFull = config.getNumberGroupInFull(group);
-
-        if (i == 0 && numberGroupInFull) {
-          result = result.concat(`${numberGroupInFull}`);
-        } else if (numberGroupInFull) {
-          result = result.concat(` ${config.andMessage} ${numberGroupInFull}`);
-        }
-      });
-
-      return result;
-    } else {
-      return config.notFoundMessage;
-    }
+    return result;
   }
 };
 
@@ -59,6 +82,13 @@ Number.prototype.zerosAfterFirstNumber = function (): number {
   });
 
   return zerosAfterFirstNumber;
+};
+
+Number.prototype.getNumberGroups = function (): string[] {
+  const numString = this.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const chunks: string[] = numString.split(',');
+
+  return chunks;
 };
 
 export {};
