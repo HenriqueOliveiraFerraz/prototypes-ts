@@ -10,7 +10,7 @@ declare global {
 
 Number.prototype.numberInFull = function (): string {
   const num = Number(this);
-  const config = Configuration.createBaseLocaleExtension();
+  const config = Configuration.getBaseLocaleExtension();
 
   let result = config.numbersWords[num] ?? '';
 

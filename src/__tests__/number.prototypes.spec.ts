@@ -50,8 +50,9 @@ const number = {
   fiftyOneThousandFifty: 51050
 };
 
+beforeAll(() => prototypesConfiguration('pt-BR'));
+
 describe('numberInFull', () => {
-  beforeAll(() => prototypesConfiguration('pt-BR'));
   it('should convert a number, to its representation in words', () => {
     Object.keys(numberJson).forEach((key) => {
       const numIndex = Number(key);
@@ -62,8 +63,6 @@ describe('numberInFull', () => {
 });
 
 describe('getNumberGroups', () => {
-  beforeAll(() => prototypesConfiguration('pt-BR'));
-
   it('should convert a number to an array of up to three characters that are also numbers', () => {
     expect(number.oneHundredNinety.getNumberGroups()).toEqual(['190']);
     expect(number.oneThousandTen.getNumberGroups()).toEqual(['1', '010']);
