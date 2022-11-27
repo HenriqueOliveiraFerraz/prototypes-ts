@@ -1,15 +1,15 @@
-/* eslint-disable prefer-const */
 import '../number-prototypes/number.prototypes';
 import { Config } from '../index';
-import { number } from '../mocks/numbers.mock';
+import { number } from './mocks/jestGlobalMocks';
 import * as fs from 'fs';
 import * as path from 'path';
+import { expect, test } from '@jest/globals';
 
 describe('numberInFull', () => {
   beforeAll(() => Config('pt-BR'));
   test('numberInFull', () => {
-    let number: { [key: number]: string } = JSON.parse(
-      fs.readFileSync(path.resolve(__dirname, '../mocks/numeros.int.mock.json'), 'utf8')
+    const number: { [key: number]: string } = JSON.parse(
+      fs.readFileSync(path.resolve(__dirname, './mocks/numeros.int.mock.json'), 'utf8')
     );
     Object.keys(number).forEach((f) => {
       const numIndex = Number(f);
