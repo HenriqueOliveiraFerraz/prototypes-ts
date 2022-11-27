@@ -1,6 +1,6 @@
 import '../number-prototypes/number.prototypes';
 import { prototypesConfiguration } from '../index';
-import numberJson from '../__mocks__/numeros.int.mock.json';
+import numberJson from '../__mocks__/numbers.mock.json';
 
 const number = {
   zero: 0,
