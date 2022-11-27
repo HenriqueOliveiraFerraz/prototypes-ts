@@ -11,6 +11,7 @@ export class Configuration {
   public static setInstance(locale: Locale): void {
     if (!Configuration.instance) {
       Configuration.instance = new Configuration(locale);
+      Configuration.setBaseLocaleExtension(locale);
     }
   }
 
@@ -18,12 +19,23 @@ export class Configuration {
     return Configuration.instance;
   }
 
-  public static createBaseLocaleExtension(): PtBr {
+  private static setBaseLocaleExtension(locale: Locale): void {
+    switch (locale) {
+      case 'pt-BR':
+        PtBr.setInstance();
+        break;
+      default:
+        PtBr.setInstance();
+        break;
+    }
+  }
+
+  public static getBaseLocaleExtension(): PtBr {
     switch (Configuration.getInstance().locale) {
       case 'pt-BR':
-        return new PtBr();
+        return PtBr.getInstance();
       default:
-        return new PtBr();
+        return PtBr.getInstance();
     }
   }
 }

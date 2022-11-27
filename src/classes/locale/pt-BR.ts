@@ -1,11 +1,21 @@
 import { BaseLocale } from '../base-locale/base.locale';
 
 export class PtBr extends BaseLocale {
-  constructor() {
+  private constructor() {
     super(PtBr.getNumbersInPtBr(), 'e', 'cento', 'mil');
   }
-
+  private static instance: PtBr;
   private lastTen = '';
+
+  public static setInstance(): void {
+    if (!PtBr.instance) {
+      PtBr.instance = new PtBr();
+    }
+  }
+
+  public static getInstance(): PtBr {
+    return PtBr.instance;
+  }
 
   private static getNumbersInPtBr(): string[] {
     const words = [
@@ -110,16 +120,6 @@ export class PtBr extends BaseLocale {
     const auxWordSuffixSingular = 'lhão';
     const auxWordSuffixPlural = 'lhões';
     switch (numLength) {
-      case 30:
-      case 29:
-        return `noni${auxWordSuffixPlural}`;
-      case 28:
-        return group.charAt(0) == '1' ? `noni${auxWordSuffixSingular}` : `noni${auxWordSuffixPlural}`;
-      case 27:
-      case 26:
-        return `octi${auxWordSuffixPlural}`;
-      case 25:
-        return group.charAt(0) == '1' ? `octi${auxWordSuffixSingular}` : `octi${auxWordSuffixPlural}`;
       case 24:
       case 23:
         return `sep${auxWordSuffixPlural}`;
