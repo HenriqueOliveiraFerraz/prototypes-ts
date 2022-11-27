@@ -6,13 +6,6 @@
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Serving the app](#serving-the-app)
-- [Running the tests](#running-the-tests)
-- [Building a distribution version](#building-a-distribution-version)
-- [Serving the distribution version](#serving-the-distribution-version)
-- [API](#api)
-- [useBasicFetch](#usebasicfetch)
-    - [Options](#options)
 
 ## Installation
 
@@ -22,9 +15,9 @@ To install and set up the library, run:
 $ npm install -D prototypes-ts
 ```
 
-## API
+## Usage
 
-### import prototypesConfiguration function to setup the locale
+### Import prototypesConfiguration function in the root file of your project to setup the locale
 
 ```ts
 import { prototypesConfiguration } from 'prototypes-ts';
@@ -36,7 +29,7 @@ prototypesConfiguration(locale: Locale);
 type Locale = 'pt-BR' | undefined;
 ```
 
-### then use any of the functions from the exported interfaces
+### Then use any of the functions from the exported interfaces
 
 ```ts
 declare global {
@@ -59,4 +52,63 @@ declare global {
     groupBy(callBack: (value: T, index: number) => PropertyKey): Record<PropertyKey, Array<T>>;
   }
 }
+```
+
+### Examples
+
+```ts
+type Inventory = {
+    name: string;
+    type: InventoryTypes;
+    quantity: number;
+    address: { state: string; country: string };
+};
+
+type InventoryTypes = 'vegetables' | 'fruit' | 'meat';
+type InventoryStates = 'CA' | 'TX' | 'AL';
+type InventoryQuantities = 0 | 5 | 22 | 23;
+type InventoryStock = 'ok' | 'restock';
+
+type GroupedByInventoryTypes = Record<InventoryTypes, Inventory[]>;
+type GroupedByInventoryStates = Record<InventoryStates, Inventory[]>;
+type GroupedByInventoryQuantities = Record<InventoryQuantities, Inventory[]>;
+type GroupedByInventoryStock = Record<InventoryStock, Inventory[]>;
+
+const inventory: Inventory[] = [
+    {
+        name: 'asparagus',
+        type: 'vegetables',
+        quantity: 5,
+        address: { state: 'CA', country: 'USA' }
+    },
+    { name: 'bananas', type: 'fruit', quantity: 0, address: { state: 'TX', country: 'USA' } },
+    { name: 'goat', type: 'meat', quantity: 23, address: { state: 'AL', country: 'USA' } },
+    { name: 'cherries', type: 'fruit', quantity: 5, address: { state: 'TX', country: 'USA' } },
+    { name: 'fish', type: 'meat', quantity: 22, address: { state: 'CA', country: 'USA' } }
+];
+
+const groupedByType = inventory.groupBy((g) => g.type);
+```
+
+The expected result fromt "inventory.groupBy((g) => g.type)" , will be equal to the following:
+
+```ts
+const expectedGroup: GroupedByInventoryTypes = {
+    vegetables: [
+    {
+        name: 'asparagus',
+        type: 'vegetables',
+        quantity: 5,
+        address: { state: 'CA', country: 'USA' }
+    }
+    ],
+    fruit: [
+    { name: 'bananas', type: 'fruit', quantity: 0, address: { state: 'TX', country: 'USA' } },
+    { name: 'cherries', type: 'fruit', quantity: 5, address: { state: 'TX', country: 'USA' } }
+    ],
+    meat: [
+    { name: 'goat', type: 'meat', quantity: 23, address: { state: 'AL', country: 'USA' } },
+    { name: 'fish', type: 'meat', quantity: 22, address: { state: 'CA', country: 'USA' } }
+    ]
+};
 ```
