@@ -63,7 +63,7 @@ describe('numberInFull', () => {
 });
 
 describe('getNumberGroups', () => {
-  it('should convert a number to an array of up to three characters that are also numbers', () => {
+  it('should convert a number to an array of up to three characters for each index that are also numbers', () => {
     expect(number.oneHundredNinety.getNumberGroups()).toEqual(['190']);
     expect(number.oneThousandTen.getNumberGroups()).toEqual(['1', '010']);
     expect(number.oneThousandFiveHundred.getNumberGroups()).toEqual(['1', '500']);
