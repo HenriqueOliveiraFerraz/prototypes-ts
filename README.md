@@ -4,30 +4,15 @@
 
 ## Table of contents
 
-- [Project Name](#project-name)
-  - [Prerequisites](#prerequisites)
-  - [Table of contents](#table-of-contents)
-  - [Getting Started](#getting-started)
-  - [Installation](#installation)
-  - [Usage](#usage)
-    - [Serving the app](#serving-the-app)
-    - [Running the tests](#running-the-tests)
-    - [Building a distribution version](#building-a-distribution-version)
-    - [Serving the distribution version](#serving-the-distribution-version)
-  - [API](#api)
-    - [useBasicFetch](#usebasicfetch)
-      - [Options](#options)
-    - [fetchData](#fetchdata)
-  - [Contributing](#contributing)
-  - [Credits](#credits)
-  - [Built With](#built-with)
-  - [Versioning](#versioning)
-  - [Authors](#authors)
-  - [License](#license)
-
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+- [Installation](#installation)
+- [Usage](#usage)
+- [Serving the app](#serving-the-app)
+- [Running the tests](#running-the-tests)
+- [Building a distribution version](#building-a-distribution-version)
+- [Serving the distribution version](#serving-the-distribution-version)
+- [API](#api)
+- [useBasicFetch](#usebasicfetch)
+    - [Options](#options)
 
 ## Installation
 
@@ -44,10 +29,14 @@ $ npm install -D prototypes-ts
 ```ts
 import { prototypesConfiguration } from 'prototypes-ts';
 
-prototypesConfiguration('pt-BR');
+prototypesConfiguration(locale: Locale);
 ```
 
-### then use any of the functions from the exported interface
+```ts
+type Locale = 'pt-BR' | undefined;
+```
+
+### then use any of the functions from the exported interfaces
 
 ```ts
 declare global {
