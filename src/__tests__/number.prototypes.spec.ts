@@ -1,19 +1,14 @@
 import '../number-prototypes/number.prototypes';
 import { Config } from '../index';
-import { number } from './mocks/jestGlobalMocks';
-import * as fs from 'fs';
-import * as path from 'path';
-import { expect, test } from '@jest/globals';
+import { number } from '../__mocks__/jestGlobalMocks';
+import numberJson from '../__mocks__/numeros.int.mock.json';
 
 describe('numberInFull', () => {
   beforeAll(() => Config('pt-BR'));
   test('numberInFull', () => {
-    const number: { [key: number]: string } = JSON.parse(
-      fs.readFileSync(path.resolve(__dirname, './mocks/numeros.int.mock.json'), 'utf8')
-    );
-    Object.keys(number).forEach((f) => {
-      const numIndex = Number(f);
-      const element = number[numIndex];
+    Object.keys(numberJson).forEach((key) => {
+      const numIndex = Number(key);
+      const element = numberJson[key as keyof typeof numberJson];
       expect(numIndex.numberInFull()).toEqual(element);
     });
   });
