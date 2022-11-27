@@ -67,14 +67,8 @@ type Inventory = {
 };
 
 type InventoryTypes = 'vegetables' | 'fruit' | 'meat';
-type InventoryStates = 'CA' | 'TX' | 'AL';
-type InventoryQuantities = 0 | 5 | 22 | 23;
-type InventoryStock = 'ok' | 'restock';
 
 type GroupedByInventoryTypes = Record<InventoryTypes, Inventory[]>;
-type GroupedByInventoryStates = Record<InventoryStates, Inventory[]>;
-type GroupedByInventoryQuantities = Record<InventoryQuantities, Inventory[]>;
-type GroupedByInventoryStock = Record<InventoryStock, Inventory[]>;
 
 const inventory: Inventory[] = [
     {

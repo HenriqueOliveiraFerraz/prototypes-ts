@@ -2,8 +2,60 @@ import { Configuration } from '../classes/configuration/configuration';
 
 declare global {
   interface Number {
+    /**
+     * @usageNotes
+     *
+     * ### Convert a number, to it's representation in words
+     *
+     * ```typescript
+     * prototypesConfiguration('pt-BR');
+     *
+     * const threeHundredEightyNine = 389;
+     * const expectedResult = threeHundredEightyNine.numberInFull();
+     *
+     * console.log(expectedResult);
+     *
+     * 'trezentos e oitenta e nove'
+     * ```
+     *
+     * @returns The representation in words of a number, based on the locale (max size of number: 1092391725462801300)
+     */
     numberInFull(): string;
+    /**
+     * @usageNotes
+     *
+     * ### Convert a number, to it's representation in words
+     *
+     * ```typescript
+     * const oneHundred = 100;
+     * console.log(oneHundred.zerosAfterFirstNumber());
+     *
+     * 2
+     * ```
+     *
+     * @returns The amount of zeros after first number
+     */
     zerosAfterFirstNumber(): number;
+    /**
+     * @description
+     * Converts a number to an array of up to three characters for each index that are also numbers
+     *
+     * @usageNotes
+     *
+     * ```typescript
+     * const oneHundredNinety = 190;
+     * console.log(oneHundredNinety.getNumberGroups());
+     *
+     * ['190']
+     *
+     * const fiftyOneThousandFifty = 51050;
+     * console.log(fiftyOneThousandFifty.getNumberGroups());
+     *
+     * ['51', '050']
+     * ```
+     *
+     * @returns An array of strings, grouped by each sequence of up to three numbers
+     */
     getNumberGroups(): string[];
   }
 }
