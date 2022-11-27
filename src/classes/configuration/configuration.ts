@@ -6,7 +6,7 @@ export class Configuration {
     this.locale = locale;
   }
   private static instance: Configuration;
-  locale: Locale;
+  private locale: Locale;
 
   public static setInstance(locale: Locale): void {
     if (!Configuration.instance) {
