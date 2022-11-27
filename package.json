@@ -1,6 +1,6 @@
 {
   "name": "prototypes-ts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Javascript prototypes extensions with Typescript",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
