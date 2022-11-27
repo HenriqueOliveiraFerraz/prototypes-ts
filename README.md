@@ -56,6 +56,8 @@ declare global {
 
 ### Examples
 
+#### Array.prototype.groupBy
+
 ```ts
 type Inventory = {
     name: string;
@@ -95,20 +97,41 @@ The expected result fromt "inventory.groupBy((g) => g.type)" , will be equal to 
 ```ts
 const expectedGroup: GroupedByInventoryTypes = {
     vegetables: [
-    {
-        name: 'asparagus',
-        type: 'vegetables',
-        quantity: 5,
-        address: { state: 'CA', country: 'USA' }
-    }
+        {
+            name: 'asparagus',
+            type: 'vegetables',
+            quantity: 5,
+            address: { state: 'CA', country: 'USA' }
+        }
     ],
     fruit: [
-    { name: 'bananas', type: 'fruit', quantity: 0, address: { state: 'TX', country: 'USA' } },
-    { name: 'cherries', type: 'fruit', quantity: 5, address: { state: 'TX', country: 'USA' } }
+        { name: 'bananas', type: 'fruit', quantity: 0, address: { state: 'TX', country: 'USA' } },
+        { name: 'cherries', type: 'fruit', quantity: 5, address: { state: 'TX', country: 'USA' } }
     ],
     meat: [
-    { name: 'goat', type: 'meat', quantity: 23, address: { state: 'AL', country: 'USA' } },
-    { name: 'fish', type: 'meat', quantity: 22, address: { state: 'CA', country: 'USA' } }
+        { name: 'goat', type: 'meat', quantity: 23, address: { state: 'AL', country: 'USA' } },
+        { name: 'fish', type: 'meat', quantity: 22, address: { state: 'CA', country: 'USA' } }
     ]
 };
+```
+
+#### Number.prototype.numberInFull
+
+```ts
+prototypesConfiguration('pt-BR');
+
+const threeHundredEightyNine = 389;
+const expectedResult = threeHundredEightyNine.numberInFull();
+
+console.log(expectedResult);
+
+'trezentos e oitenta e nove'
+```
+
+#### String.prototype.capitalizeFirstLetter
+
+```ts
+console.log('carl'.capitalizeFirstLetter());
+
+'Carl'
 ```
