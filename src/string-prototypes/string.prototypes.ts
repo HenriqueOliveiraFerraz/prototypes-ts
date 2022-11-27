@@ -1,6 +1,12 @@
 declare global {
   interface String {
+    /**
+     * @returns True if the string has only letters, false otherwise
+     */
     hasOnlyLetters(): boolean;
+    /**
+     * @returns Capitalize the first letter of a word and returns it
+     */
     capitalizeFirstLetter(): string;
   }
 }
