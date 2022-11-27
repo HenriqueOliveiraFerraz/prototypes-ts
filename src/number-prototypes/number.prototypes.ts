@@ -5,7 +5,7 @@ declare global {
     /**
      * @usageNotes
      *
-     * ### Convert a number, to it's representation in words
+     * ### Converts a number, to it's representation in words
      *
      * ```typescript
      * prototypesConfiguration('pt-BR');
@@ -24,7 +24,7 @@ declare global {
     /**
      * @usageNotes
      *
-     * ### Convert a number, to it's representation in words
+     * ### Converts a number, to it's representation in words
      *
      * ```typescript
      * const oneHundred = 100;
